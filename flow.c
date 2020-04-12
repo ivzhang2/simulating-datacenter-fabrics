@@ -45,6 +45,7 @@ void printList(struct FlowNode *node)
   } 
 } 
 
+/* Read flow CDF from file */
 struct FlowNode* init_flow (char* filename) {
     char num_bytes[16];
     char prob[16];
