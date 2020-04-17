@@ -69,6 +69,7 @@ float get_next_flow(struct FlowNode *node)
         exit(0);
     }
     float r = ((float) rand() / (RAND_MAX));
+    
     while (node->cdf < r)
     {
         node = node->next;

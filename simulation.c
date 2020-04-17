@@ -12,8 +12,6 @@ void simulation(char* filename, double interarrival_time, double total_simulatio
 	FILE *fp;
 	fp=fopen("simulation.csv","w+");
 
-
-	srand(time(NULL));
 	double seed = rand();
 	double lambda = total_simulation_time/interarrival_time;
 
@@ -27,7 +25,7 @@ void simulation(char* filename, double interarrival_time, double total_simulatio
 		next_arrival = get_arrival_time(&arrival_times);
 		next_data_flow = get_next_flow(data_flows);
 		total_simulation_time -= next_arrival;
-		fprintf(fp,"%f,%f\n", next_arrival, next_data_flow); // write to csv in format "arrival time, data size \n"
+		fprintf(fp,"%lf,%lf \n", next_arrival, next_data_flow); // write to csv in format "arrival time, data size \n"
 	}
 
 	fclose(fp);
@@ -37,6 +35,6 @@ void simulation(char* filename, double interarrival_time, double total_simulatio
 
 
 int main(){
-	simulation("test_cdf.txt", 5, 100);
+	simulation("test_cdf.txt", 5.0, 100.0);
 	return 0;
 }
