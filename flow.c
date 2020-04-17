@@ -2,13 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* A linked list node */
-struct FlowNode 
-{ 
-    float flowsize;
-    float cdf; 
-    struct FlowNode *next; 
-};
+#include "flow.h"
 
 /* Append node to linked list  */
 void append(struct FlowNode** head_ref, int new_flowsize, float new_cdf) 
