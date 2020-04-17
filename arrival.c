@@ -8,10 +8,7 @@
 #include <limits.h>
 #include <stdint.h>
 
-typedef struct {
-	double seed;
-	double lambda;
-} poissonProcess;
+#include "arrival.h"
 
 poissonProcess init_poissonProcess (double seed, double lambda){
 	poissonProcess p={.seed = seed, .lambda=lambda};
@@ -27,9 +24,4 @@ double get_arrival_time(poissonProcess* p){
 	return arrival_time;
 }
 
-// int main() {
-// 	poissonProcess p = init_poissonProcess(10.0, 10.0);
-// 	printf("%f\n", get_arrival_time(&p));
-// 	return 0;
-// }
 
