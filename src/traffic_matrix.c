@@ -1,5 +1,6 @@
-#include "traffix_matrix.h"
+#include "traffic_matrix.h"
 
+#include <assert.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -9,7 +10,7 @@ struct traffic_matrix_t *traffic_matrix_init(const size_t n_nodes) {
 
   assert(n_nodes > 0);
   pm->lst = malloc(sizeof(size_t) * n_nodes * n_nodes);
-  aasert(pm->lst != NULL);
+  assert(pm->lst != NULL);
 
   pm->n_nodes = n_nodes;
 
@@ -70,7 +71,7 @@ struct traffic_matrix_t *traffic_matrix_from_file(const char *filename,
       assert(str_val != NULL);
 
       pm->lst[row * pm->n_nodes + i] = atof(str_val);
-      assert(pm->lst[row * pm->n_nodes + 1] >= 0);
+      assert(pm->lst[row * pm->n_nodes + i] >= 0);
     }
 
     ++row;
@@ -78,6 +79,11 @@ struct traffic_matrix_t *traffic_matrix_from_file(const char *filename,
 
   if (pm != NULL) {
     assert(row == pm->n_nodes);
+  }
+
+  fclose(pf);
+  if (line) {
+    free(line);
   }
 
   return pm;
@@ -150,3 +156,42 @@ void traffic_matrix_sample(struct traffic_matrix_t *pm, size_t *src,
   *src = index / pm->n_nodes;
   *dst = index % pm->n_nodes;
 }
+
+#define TRAFFIC_MATRIX_TEST
+
+#ifdef TRAFFIC_MATRIX_TEST
+
+int main() {
+
+  struct traffic_matrix_t *pm = traffic_matrix_from_file("test.matrix", 11);
+  size_t src;
+  size_t dst;
+
+  FILE *pf;
+  pf = fopen("../simulation.csv", "r");
+  assert(pf != NULL);
+
+  FILE *pout;
+  pout = fopen("../annotated.csv", "w");
+  assert(pout != NULL);
+
+  char *line = NULL;
+  size_t len = 0;
+  ssize_t read;
+
+  while ((read = getline(&line, &len, pf)) != -1) {
+    traffic_matrix_sample(pm, &src, &dst);
+    fprintf(pout, "%zu,%zu,%s", src, dst, line);
+  }
+
+  fclose(pf);
+  if (line) {
+    free(line);
+  }
+
+  fclose(pout);
+
+  printf("Done\n");
+}
+
+#endif /* TRAFFIC_MATRIX_TEST */
