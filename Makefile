@@ -11,6 +11,7 @@ CC_CMD=$(CC) $(CFLAGS)
 OBJ_DIR=obj
 BIN_DIR=bin
 DEP_DIR=deps
+DOC_DIR=docs
 
 SRCS=$(wildcard *.c)
 DEPS=$(srcs:.c=.d)
@@ -23,7 +24,10 @@ simulation: flow.o arrival.o simulation.o
 run: simulation
 	$(BIN_DIR)/simulation
 
-.PHONY: clean obj_dir_tgt bin_dir_tgt dep_dir_tgt
+.PHONY: clean obj_dir_tgt bin_dir_tgt dep_dir_tgt doc
+
+doc:
+	doxygen doc.config
 
 %.o : %.c
 	$(CC) $(CFLAGS) -MMD -MP -c $< -o $(OBJ_DIR)/$@
@@ -45,5 +49,6 @@ clean:
 	rm -rf $(BIN_DIR)
 	rm -rf $(OBJ_DIR)
 	rm -rf $(DEP_DIR)
+	rm -rf $(DOC_DIR)
 
 -include $(DEPS)
