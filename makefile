@@ -14,4 +14,4 @@ run: simulation
 	./simulation
 
 clean: 
-	rm simulation *.o
+	rm simulation *.o *.gch
