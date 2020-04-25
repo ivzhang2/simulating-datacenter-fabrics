@@ -34,6 +34,6 @@ long queue_enqueue(struct queue_t* q, long start_time, long wait_time);
 int queue_dequeue(struct queue_t* q);
 
 // Free entire queue
-void queue_free(struct quequeue_tue *q);
+void queue_free(struct queue_t *q);
 
 #endif
