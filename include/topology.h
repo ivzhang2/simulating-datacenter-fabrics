@@ -15,5 +15,7 @@ struct topology_t {
 };
 
 struct topology_t *topology_load(const char *filename, const size_t n_filename);
+void topology_export_to_dot(const struct topology_t *topo, const char *filename,
+                            const size_t n_filename);
 
 #endif /* TOPOLOGY_H */

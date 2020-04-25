@@ -43,7 +43,7 @@ void simulation(char *filename, double interarrival_time,
 
 int main() {
   struct topology_t *topo = topology_load("tests/test.topo", 15);
-  (void)topo;
+  topology_export_to_dot(topo, "results/exported_topo.dot", 25);
   // simulation("tests/test_cdf.txt", 5.0, 100.0);
   return 0;
 }

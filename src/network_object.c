@@ -16,10 +16,14 @@ struct network_object_t *network_object_init(const enum object_type_t type,
 
   rtn->id = id;
 
+  memset(rtn->name, 0, OBJ_NAME_SIZE);
+  strncpy(rtn->name, "UNNAMED", 7);
+
   return rtn;
 }
 
 void network_object_set_name(struct network_object_t *a, const char *name) {
+  memset(a->name, 0, OBJ_NAME_SIZE);
   strncpy(a->name, name, OBJ_NAME_SIZE);
 }
 

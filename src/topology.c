@@ -16,7 +16,7 @@ struct topology_t *topology_load(const char *filename,
 
   char *cpy_filename = strndup(filename, n_filename);
 
-  pf = fopen(filename, "r");
+  pf = fopen(cpy_filename, "r");
   assert(pf != NULL);
 
   struct topology_t *topo = malloc(sizeof(struct topology_t));
@@ -149,4 +149,32 @@ struct topology_t *topology_load(const char *filename,
   free(cpy_filename);
 
   return topo;
+}
+
+void topology_export_to_dot(const struct topology_t *topo, const char *filename,
+                            const size_t n_filename) {
+  assert(filename != NULL);
+  assert(n_filename > 0);
+  assert(topo != NULL);
+  assert(topo->links != NULL);
+
+  char *cpy_filename = strndup(filename, n_filename);
+
+  FILE *pf = fopen(cpy_filename, "w");
+  assert(pf != NULL);
+
+  fprintf(pf, "graph topology {\n");
+
+  size_t i = 0;
+
+  for (i = 0; i < topo->n_links; i++) {
+    struct network_object_t *link = topo->links[i];
+    assert(link->n_conn == 2);
+
+    fprintf(pf, "\t%s -- %s;\n", link->conn[0]->name, link->conn[1]->name);
+  }
+
+  fprintf(pf, "}\n");
+  fclose(pf);
+  free(cpy_filename);
 }
