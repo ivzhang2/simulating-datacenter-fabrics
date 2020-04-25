@@ -2,33 +2,16 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#define TRUE 1
-#define FALSE 0
+#include <stdbool.h>
 
-struct node
+void initialize(struct queue_t* q)
 {
-    long start_time;
-    long wait_time;
-    struct node *next;
-};
-typedef struct node node;
-
-struct queue
-{
-    int count;
-    node *front;
-    node *rear;
-};
-typedef struct queue queue;
-
-void initialize(queue *q)
-{
-    q->count = 0;
+    q->size_t = 0;
     q->front = NULL;
     q->rear = NULL;
 }
 
-void display(node *head)
+void packet_display(struct packet* head)
 {
     if(head == NULL)
     {
@@ -37,38 +20,39 @@ void display(node *head)
     else
     {
         printf("%d\n", head -> wait_time);
-        display(head->next);
+        packet_display(head->next);
     }
 }
 
-int isempty(queue *q)
+int isempty(struct queue_t* q)
 {
     return (q->rear == NULL);
 }
 
 // Returns the time at which the enqueued flow will leave the switch and enqueues the flow
-long enqueue(queue *q, long start_time, long wait_time)
+long queue_enqueue(struct queue_t* q, long start_time, long wait_time)
 {
-        node *tmp;
-        tmp = malloc(sizeof(node));
+        struct packet* tmp;
+        tmp = malloc(sizeof(struct packet));
+        assert(tmp != NULL);
         tmp->start_time = start_time;
         tmp->wait_time = wait_time;
         tmp->next = NULL;
-        q->count++;
+        q->size_t++;
         if(!isempty(q))
         {
             q->rear->next = tmp;
             q->rear = tmp;
             long dequeue_time = q->front->start_time;
-            node *cur_node = q->front;
-            while (cur_node != NULL)
+            struct packet* cur_packet = q->front;
+            while (cur_packet != NULL)
             {
-                dequeue_time += cur_node->wait_time;
-                cur_node = cur_node->next;
+                dequeue_time += cur_packet->wait_time;
+                cur_packet = cur_packet->next;
             }
             return dequeue_time;
         }
-        else // First node in queue
+        else // First packet in queue
         {
             q->front = q->rear = tmp;
             return start_time + wait_time;
@@ -76,23 +60,23 @@ long enqueue(queue *q, long start_time, long wait_time)
 }
 
 // Returns wait time of dequeued flow
-int dequeue(queue *q)
+int queue_dequeue(struct queue_t* q)
 {
-    node *tmp;
+    struct packet* tmp;
     long n = q->front->wait_time;
     tmp = q->front;
     q->front = q->front->next;
-    q->count--;
+    q->size_t--;
     free(tmp);
     return(n);
 }
 
 // Free entire queue
-void free_queue(queue *q)
+void queue_free(struct queue_t* q)
 {
-    node *n = q->front;
+    struct packet* n = q->front;
     while (n != NULL) {
-        struct node *victim = n;
+        struct packet *victim = n;
         n = n->next;
         free (victim);
     }

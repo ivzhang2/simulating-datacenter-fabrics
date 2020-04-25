@@ -4,36 +4,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node
+struct packet
 {
     long start_time;
     long wait_time;
-    struct node *next;
+    struct packet *next;
 };
 
-struct queue
+struct queue_t
 {
-    int count;
-    node *front;
-    node *rear;
+    int size_t;
+    struct packet* front;
+    struct packet* rear;
 };
 
 // Initialize a queue
-void initialize(queue *q);
+void queue_initialize(struct queue_t* q);
 
 // Display the queue
-void display(node *head);
+void queue_display(struct packet* head);
 
 // Is the queue empty
-int isempty(queue *q);
+int queue_isempty(struct queue_t* q);
 
 // Returns the time at which the enqueued flow will leave the switch and enqueues the flow
-long enqueue(queue *q, long start_time, long wait_time);
+long queue_enqueue(struct queue_t* q, long start_time, long wait_time);
 
 // Dequeues the next flow and returns its wait time
-int dequeue(queue *q);
+int queue_dequeue(struct queue_t* q);
 
 // Free entire queue
-void free_queue(queue *q);
+void queue_free(struct quequeue_tue *q);
 
 #endif
