@@ -33,8 +33,8 @@ struct topology_t *topology_load(const char *filename,
 
     str_val = strtok(line, " ");
 
-    if (strncpy("switches", str_val, 8) == 0) {
-      str_val = strtok(line, "\n");
+    if (strncmp("switches", str_val, 8) == 0) {
+      str_val = strtok(NULL, "\n");
       topo->n_switches = atol(str_val);
       assert(topo->n_switches > 0);
 
@@ -56,8 +56,8 @@ struct topology_t *topology_load(const char *filename,
       continue;
     }
 
-    if (strncpy("servers", str_val, 7) == 0) {
-      str_val = strtok(line, "\n");
+    if (strncmp("servers", str_val, 7) == 0) {
+      str_val = strtok(NULL, "\n");
       topo->n_servers = atol(str_val);
       assert(topo->n_servers > 0);
 
@@ -79,8 +79,8 @@ struct topology_t *topology_load(const char *filename,
       continue;
     }
 
-    if (strncpy("links", str_val, 5) == 0) {
-      str_val = strtok(line, "\n");
+    if (strncmp("links", str_val, 5) == 0) {
+      str_val = strtok(NULL, "\n");
       topo->n_links = atol(str_val);
       assert(topo->n_links > 0);
 
@@ -101,11 +101,11 @@ struct topology_t *topology_load(const char *filename,
       continue;
     }
 
-    if (strncpy("connect", str_val, 7) == 0) {
+    if (strncmp("connect", str_val, 7) == 0) {
       struct network_object_t *a;
       struct network_object_t *b;
 
-      str_val = strtok(line, " ");
+      str_val = strtok(NULL, " ");
       assert(strnlen(str_val, 10) > 1);
 
       char type = str_val[0];
@@ -117,7 +117,7 @@ struct topology_t *topology_load(const char *filename,
 
       a = topo->links[index_a];
 
-      str_val = strtok(line, "\n");
+      str_val = strtok(NULL, "\n");
       assert(strnlen(str_val, 10) > 1);
 
       type = str_val[0];

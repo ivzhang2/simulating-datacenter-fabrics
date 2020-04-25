@@ -1,9 +1,9 @@
-#include <stdlib.h>
-#include <time.h>
-
 #include "arrival.h"
 #include "flow.h"
+#include "topology.h"
 
+#include <stdlib.h>
+#include <time.h>
 /*
         Given: filename of the CDF, interarrival time between flows, and the
    total simulation time (milliseconds) Returns large csv ("simulation.csv")
@@ -42,6 +42,8 @@ void simulation(char *filename, double interarrival_time,
 }
 
 int main() {
-  simulation("tests/test_cdf.txt", 5.0, 100.0);
+  struct topology_t *topo = topology_load("tests/test.topo", 15);
+  (void)topo;
+  // simulation("tests/test_cdf.txt", 5.0, 100.0);
   return 0;
 }
