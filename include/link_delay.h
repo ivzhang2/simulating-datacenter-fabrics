@@ -1,4 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+/* A link object */
+struct link {
+  double link_length;
+  double material_factor;
+  double calculated_delay;
+};
+
+
 static const double SPEED_OF_LIGHT = 299792458; // in meters/seconds
+
+
 /*
 	Function: get_link_delay	
  	---------------------------------------------------------------------------------------
@@ -11,8 +24,8 @@ static const double SPEED_OF_LIGHT = 299792458; // in meters/seconds
 		double material_factor_speedOfLight: factor of speed of light of material
 
 	@returns
-		double link_delay: delay per link (in milliseconds) based on given inputs
+		struct link *: link object with characteristics of link and delay
 
 
  */
-double get_link_delay(double link_length, double material_factor_speedOfLight);
+struct link *get_link_delay(double link_length, double material_factor_speedOfLight);
