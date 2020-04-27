@@ -3,9 +3,10 @@
 
 /* A link object */
 struct link {
-  double link_length;
-  double material_factor;
-  double calculated_delay;
+  double link_length; // length of link
+  double material_factor; // factor of the speed of the light in material
+  double calculated_delay; // calculated delay per link
+  double data_rate; // date rate of link in Mbps (i.e. bandwidth)
 };
 
 
