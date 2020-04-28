@@ -42,7 +42,7 @@ struct traffic_matrix_t *traffic_matrix_from_file(const char *filename,
 
   char *cpy_filename = strndup(filename, n_filename);
 
-  pf = fopen(filename, "r");
+  pf = fopen(cpy_filename, "r");
   assert(pf != NULL);
 
   struct traffic_matrix_t *pm = NULL;
@@ -85,6 +85,8 @@ struct traffic_matrix_t *traffic_matrix_from_file(const char *filename,
   if (line) {
     free(line);
   }
+
+  free(cpy_filename);
 
   return pm;
 }
@@ -157,7 +159,7 @@ void traffic_matrix_sample(struct traffic_matrix_t *pm, size_t *src,
   *dst = index % pm->n_nodes;
 }
 
-#define TRAFFIC_MATRIX_TEST
+// #define TRAFFIC_MATRIX_TEST
 
 #ifdef TRAFFIC_MATRIX_TEST
 
