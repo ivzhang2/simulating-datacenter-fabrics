@@ -17,7 +17,7 @@ struct queue_t
 };
 
 // Initialize a queue
-void queue_initialize(struct queue_t* q);
+void queue_init(struct queue_t* q);
 
 // Returns the time at which the enqueued flow will leave the switch and enqueues the packet
 long queue_enqueue(struct queue_t* q, struct packet* p);

@@ -4,12 +4,12 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-void initialize(struct queue_t* q)
+void queue_init(struct queue_t* q)
 {
     q->last_dequeue_time = 0;
 }
 
-// Returns the time at which the enqueued flow will leave the switch and enqueues the packet
+// Enqueues the packet and returns the total time the packet will wait before it leaves the switch
 long queue_enqueue(struct queue_t* q, struct packet* p)
 {
     if (p->start_time >= q->last_dequeue_time){
@@ -18,7 +18,7 @@ long queue_enqueue(struct queue_t* q, struct packet* p)
     else {
         q->last_dequeue_time += p->wait_time;
     }
-    return q->last_dequeue_time;
+    return q->last_dequeue_time - p->start_time;
 }
 
 void queue_free(struct queue_t* q)
