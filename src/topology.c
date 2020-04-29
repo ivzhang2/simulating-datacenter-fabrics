@@ -1,4 +1,5 @@
 #include "topology.h"
+#include "queue.h"
 
 #include <assert.h>
 #include <stdio.h>
@@ -177,4 +178,13 @@ void topology_export_to_dot(const struct topology_t *topo, const char *filename,
   fprintf(pf, "}\n");
   fclose(pf);
   free(cpy_filename);
+}
+
+void topology_add_queues(struct topology_t* t) {
+  size_t i = 0;
+  for (i=0; i<t->n_switches; i++) {
+    struct queue_t* q;
+    queue_init(q);
+    t->switches[i]->data = q;
+  }
 }
