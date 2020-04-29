@@ -1,5 +1,6 @@
 #include "topology.h"
 
+#include "link.h"
 #include "switch.h"
 #include <assert.h>
 #include <stdio.h>
@@ -180,9 +181,18 @@ void topology_export_to_dot(const struct topology_t *topo, const char *filename,
   free(cpy_filename);
 }
 
-void topology_add_switches(struct topology_t *t, double microsec_line_rate) {
-  size_t i = 0;
-  for (i = 0; i < t->n_switches; i++) {
-    t->switches[i]->data = switch_init(microsec_line_rate);
+void topology_init_switches(struct topology_t *pt, double microsec_line_rate) {
+  register size_t i;
+  for (i = 0; i < pt->n_switches; i++) {
+    pt->switches[i]->data = switch_init(microsec_line_rate);
+  }
+}
+
+void topology_init_links(struct topology_t *pt, double link_length,
+                         double material_factor) {
+  register size_t i;
+
+  for (i = 0; i < pt->n_links; i++) {
+    pt->links[i]->data = link_init(link_length, material_factor);
   }
 }
