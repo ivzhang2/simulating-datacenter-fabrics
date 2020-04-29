@@ -1,5 +1,5 @@
-#ifndef header_flow
-#define header_flow
+#ifndef FLOW_H
+#define FLOW_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,4 +30,4 @@ float get_next_flow(struct flow_node_t *node);
 /* Free linked list */
 void flow_free(struct flow_node_t *node);
 
-#endif
+#endif /* FLOW_H */
