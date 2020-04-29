@@ -1,6 +1,6 @@
 #include "arrival.h"
 #include "flow.h"
-#include "link_delay.h"
+#include "link.h"
 #include "topology.h"
 
 #include <stdlib.h>

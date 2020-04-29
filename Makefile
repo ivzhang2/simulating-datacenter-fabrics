@@ -18,7 +18,7 @@ DEPS=$(srcs:.c=.d)
 
 all: dir_tgt simulation
 
-simulation: flow.o arrival.o network_object.o topology.o simulation.o link_delay.o
+simulation: flow.o arrival.o network_object.o topology.o switch.o link.o simulation.o
 	$(CC_CMD) $(^:%.o=$(OBJ_DIR)/%.o) -o $(BIN_DIR)/$@ $(LIB)
 
 run: simulation

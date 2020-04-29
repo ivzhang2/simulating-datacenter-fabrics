@@ -1,6 +1,6 @@
 #include "topology.h"
-#include "queue.h"
 
+#include "switch.h"
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
@@ -180,11 +180,9 @@ void topology_export_to_dot(const struct topology_t *topo, const char *filename,
   free(cpy_filename);
 }
 
-void topology_add_queues(struct topology_t* t) {
+void topology_add_switches(struct topology_t *t, double microsec_line_rate) {
   size_t i = 0;
-  for (i=0; i<t->n_switches; i++) {
-    struct queue_t* q;
-    queue_init(q);
-    t->switches[i]->data = q;
+  for (i = 0; i < t->n_switches; i++) {
+    t->switches[i]->data = switch_init(microsec_line_rate);
   }
 }

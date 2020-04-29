@@ -17,6 +17,7 @@ struct topology_t {
 struct topology_t *topology_load(const char *filename, const size_t n_filename);
 void topology_export_to_dot(const struct topology_t *topo, const char *filename,
                             const size_t n_filename);
-void topology_add_queues(struct topology* t);
+
+void topology_add_switches(struct topology_t *t, double microsec_line_rate);
 
 #endif /* TOPOLOGY_H */
