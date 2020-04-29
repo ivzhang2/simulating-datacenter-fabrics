@@ -1,11 +1,15 @@
 #ifndef PACKET_H
 #define PACKET_H
 
+#include "network_object.h"
+
 #include <stdint.h>
 #include <stdlib.h>
 
 /* Standard time to live length */
 #define TTL_MAX 255
+
+enum packet_state_t { PS_PENDING, PS_IN_NETWORK, PS_TERMINATED };
 
 /* Network packet object */
 struct packet_t {
@@ -24,6 +28,11 @@ struct packet_t {
 
   /* size of path array */
   size_t n_path;
+
+  /* current position in path */
+  size_t curr_pos;
+
+  enum packet_state_t state;
 };
 
 #endif /* PACKET_H */
