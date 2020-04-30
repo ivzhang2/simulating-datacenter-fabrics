@@ -27,4 +27,28 @@ void packet_traverse_next(struct packet_t *pp) {
     struct link_t *pl = (struct link_t *)obj->data;
     pp->curr_time += pl->calculated_delay;
   }
+
+  ++pp->curr_pos;
+  --pp->ttl;
+
+  if ((pp->curr_pos == pp->n_path) || (pp->ttl == 0)) {
+    pp->state = PS_TERMINATED;
+  }
+}
+
+struct packet_t *packet_get_earliest(struct packet_t **const pparr,
+                                     const size_t n_pparr) {
+  assert(n_pparr > 0);
+
+  struct packet_t *pp = pparr[0];
+
+  register size_t i;
+
+  for (i = 1; i < n_pparr; i++) {
+    if ((pp->curr_time > pparr[i]->curr_time) && (pp->state != PS_TERMINATED)) {
+      pp = pparr[i];
+    }
+  }
+
+  return pp;
 }

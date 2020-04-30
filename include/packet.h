@@ -35,4 +35,9 @@ struct packet_t {
   enum packet_state_t state;
 };
 
+void packet_traverse_next(struct packet_t *pp);
+
+struct packet_t *packet_get_earliest(struct packet_t **const pparr,
+                                     const size_t n_pparr);
+
 #endif /* PACKET_H */
