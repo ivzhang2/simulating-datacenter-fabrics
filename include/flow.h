@@ -5,9 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// R2: better naming: flow_node_t. To be more consistent with the libraries we
-// use including the C standard library.
-
 /* A linked list node */
 struct flow_node_t {
   float flowsize;
