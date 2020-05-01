@@ -24,6 +24,9 @@ simulation: flow.o arrival.o network_object.o topology.o switch.o link.o packet.
 run: simulation
 	$(BIN_DIR)/simulation
 
+traffic_generator: flow.o arrival.o traffic_generator.o
+	$(CC_CMD) $(^:%.o=$(OBJ_DIR)/%.o) -o $(BIN_DIR)/$@ $(LIB)
+
 .PHONY: clean obj_dir_tgt bin_dir_tgt dep_dir_tgt doc
 
 doc:
