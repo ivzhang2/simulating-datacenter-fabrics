@@ -9,8 +9,13 @@
 
 struct simulation_runs_t {
   struct packet_t **parr_arr; // 2D array of pointers to packet in same topo
-  struct topology_t *
-      *topoarr; // pointer to array of topologies based on packet movement
+
+  // pointer to array of topologies based on packet movement
+  struct topology_t **topoarr;
+
+  size_t *n_parr_counts_arr;
+  size_t n_parr_arr;
+  size_t n_topoarr;
 };
 
 /*

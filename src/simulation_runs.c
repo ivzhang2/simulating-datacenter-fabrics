@@ -1,7 +1,8 @@
+#include "simulation_runs.h"
+
+#include <assert.h>
 #include <stdio.h>
 #include <string.h>
-
-#include "simulation_runs.h"
 
 int is_same_network_object(struct network_object_t *a,
                            struct network_object_t *b) {
@@ -152,11 +153,15 @@ struct simulation_runs_t *generate_sim_runs(struct packet_t **p_arr,
   struct simulation_runs_t *sim_runs = malloc(sizeof(struct simulation_runs_t));
   struct packet_t **packet_arr = malloc(sizeof(struct packet_t *));
   struct topology_t **topo_arr = malloc(sizeof(struct topology_t));
-  int num_topology = 0; // number of topologies stored in arrays
-  int match =
-      0; // 1 if path was merge, else 0 to create new topology and packet array
-  int count[num_packets]; // maintains the count of each packet array in
-                          // packet_arr
+
+  size_t num_topology = 0; // number of topologies stored in arrays
+
+  // 1 if path was merge, else 0 to create new topology and packet array
+  int match = 0;
+
+  // maintains the count of each packet array in packet_arr
+  size_t *count = malloc(sizeof(int) * num_packets);
+  assert(count != NULL);
 
   for (int i = 0; i < num_packets; ++i) {
     match = 0;
@@ -183,7 +188,6 @@ struct simulation_runs_t *generate_sim_runs(struct packet_t **p_arr,
           realloc(packet_arr, sizeof(struct packet_t *) * (num_topology + 1));
       topo_arr =
           realloc(topo_arr, sizeof(struct topology_t *) * (num_topology + 1));
-      ;
       packet_arr[num_topology] = p_arr[i];
       count[i] = 1;
       topo_arr[num_topology] =
@@ -194,6 +198,10 @@ struct simulation_runs_t *generate_sim_runs(struct packet_t **p_arr,
 
   sim_runs->parr_arr = packet_arr;
   sim_runs->topoarr = topo_arr;
+
+  sim_runs->n_topoarr = num_topology;
+  sim_runs->n_parr_arr = num_topology;
+  sim_runs->n_parr_counts_arr = count;
 
   return sim_runs;
 }
