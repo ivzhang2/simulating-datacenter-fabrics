@@ -16,7 +16,7 @@ DOC_DIR=docs
 SRCS=$(wildcard *.c)
 DEPS=$(srcs:.c=.d)
 
-all: dir_tgt simulation
+all: dir_tgt simulation traffic_generator
 
 simulation: flow.o arrival.o network_object.o topology.o switch.o link.o packet.o simulation_runs.o simulation.o
 	$(CC_CMD) $(^:%.o=$(OBJ_DIR)/%.o) -o $(BIN_DIR)/$@ $(LIB)

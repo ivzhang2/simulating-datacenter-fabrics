@@ -123,5 +123,5 @@ static void generate_traffic(char *cdf_file, char *tm_file, char *output_file,
 
 int main() {
   generate_traffic("tests/test_cdf.txt", "tests/test.matrix",
-                   "results/generated_trace.csv", 1.0, 1000.0, 4);
+                   "results/generated_trace.csv", 1.0, 100000.0, 1);
 }
