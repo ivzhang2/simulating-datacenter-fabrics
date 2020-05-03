@@ -5,6 +5,26 @@
 #include <stdlib.h>
 #include <time.h>
 
+#ifndef NUM_THREADS
+#define NUM_THREADS 1
+#endif /* NUM_THREADS */
+
+#define MAX_FILENAME 1024
+
+struct _thread_args_t {
+  char *input_file;
+  char *output_file;
+  size_t n_input_file size_t n_output_file;
+  double interarrival_time;
+  double sim_time;
+};
+
+static void *_threaded_traffic_gen(void *args) {
+  struct _thread_args_t *unpacked = (struct _threaded_args_t *)args;
+
+  return NULL;
+}
+
 /*
    Given: filename of the CDF, interarrival time between flows, and the
    total simulation time (milliseconds) Returns large csv ("simulation.csv")
