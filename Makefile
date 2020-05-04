@@ -16,15 +16,15 @@ DOC_DIR=docs
 SRCS=$(wildcard *.c)
 DEPS=$(srcs:.c=.d)
 
-all: dir_tgt simulation
+all: dir_tgt simulation traffic_generator
 
-simulation: network_object.o topology.o switch.o link.o packet.o simulation.o
+simulation: flow.o arrival.o network_object.o topology.o switch.o link.o packet.o simulation_runs.o simulation.o
 	$(CC_CMD) $(^:%.o=$(OBJ_DIR)/%.o) -o $(BIN_DIR)/$@ $(LIB)
 
 run: simulation
 	$(BIN_DIR)/simulation
 
-traffic_generator: flow.o arrival.o traffic_generator.o
+traffic_generator: flow.o arrival.o traffic_matrix.o traffic_generator.o
 	$(CC_CMD) $(^:%.o=$(OBJ_DIR)/%.o) -o $(BIN_DIR)/$@ $(LIB)
 
 .PHONY: clean obj_dir_tgt bin_dir_tgt dep_dir_tgt doc
