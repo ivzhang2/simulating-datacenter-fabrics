@@ -1,7 +1,0 @@
-switches 1
-servers 2
-links 2
-connect l0 s0
-connect l0 h0
-connect l1 s0
-connect l1 h1

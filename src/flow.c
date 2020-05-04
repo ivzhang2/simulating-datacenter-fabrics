@@ -3,7 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* Append node to linked list  */
+/**
+* Add the next flow to the current flow object (append node to the linked list)
+*/
 void append(struct flow_node_t **head_ref, int new_flowsize, float new_cdf) {
   struct flow_node_t *new_node =
       (struct flow_node_t *)malloc(sizeof(struct flow_node_t));
@@ -26,7 +28,9 @@ void append(struct flow_node_t **head_ref, int new_flowsize, float new_cdf) {
   return;
 }
 
-/* Print linked list */
+/**
+* Print the list of the flow object (linked list)
+*/
 void print_list(struct flow_node_t *node) {
   while (node != NULL) {
     printf("%f ", node->flowsize);
@@ -35,7 +39,9 @@ void print_list(struct flow_node_t *node) {
   }
 }
 
-/* Free linked list */
+/**
+* Free the memory utlized by the flow object (linked list)
+*/
 void flow_free(struct flow_node_t *node) {
   while (node != NULL) {
     struct flow_node_t *victim = node;
@@ -45,7 +51,10 @@ void flow_free(struct flow_node_t *node) {
   if (node) free (node);
 }
 
-/* Read flow CDF from file */
+/**
+* Given the file (with data about the distribution of the flow), 
+* this function will read the flow from the given CDF distribution 
+*/
 struct flow_node_t *init_flow(char *filename) {
   char num_bytes[16];
   char prob[16];
@@ -66,7 +75,9 @@ struct flow_node_t *init_flow(char *filename) {
   return flow_dist;
 }
 
-/* Generate a random flow size according to the CDF */
+/**
+* Generate a random flow size according to the CDF, using inverse CDF method 
+*/
 float get_next_flow(struct flow_node_t *node) {
   if (node == NULL) {
     printf("Flow size distribution has not been loaded\n");
