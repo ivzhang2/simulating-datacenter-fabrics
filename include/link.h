@@ -18,15 +18,15 @@ struct link_t {
 #define SPEED_OF_LIGHT 299792458 // in meters/seconds
 
 /**
-* calculates the link delay per link with the formula: (length of link) / 
+*calculates the link delay per link with the formula: (length of link) / 
 * (factor of speed of light * speed of light)
-*
+
 * params:
 * 
 * - link_length: length of each link (assuming each is the same length) in meters 
 * - double material_factor_speedOfLight: factor of speed of light of material
-*
-* returns struct link: link object with characteristics of link and delay
+
+* returns struct link : link object with characteristics of link and delay
 */
 struct link_t *link_init(double link_length,
                          double material_factor_speedOfLight);

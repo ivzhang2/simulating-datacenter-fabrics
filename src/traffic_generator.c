@@ -5,10 +5,10 @@
 #include <stdlib.h>
 #include <time.h>
 
-/*
-   Given: filename of the CDF, interarrival time between flows, and the
-   total simulation time (milliseconds) Returns large csv ("simulation.csv")
-   with interarrival times
+/**
+* Given: filename of the CDF, interarrival time between flows, and the
+* total simulation time (milliseconds) Returns large csv ("simulation.csv")
+* with interarrival times
 */
 static void generate_traffic(char *filename, char *output_fname,
                              double interarrival_time,
@@ -45,6 +45,9 @@ static void generate_traffic(char *filename, char *output_fname,
   fclose(fp);
 }
 
+/**
+* Testing - generate the traffic using the example cdf distrbution test_cdf.txt and simulation data simulation.csv
+*/
 int main() {
   generate_traffic("tests/test_cdf.txt", "results/simulation.csv", 1.0, 1000.0);
 }
