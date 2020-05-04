@@ -17,7 +17,7 @@ stack, costs upwards of a billion dollars. Hence, computer scientists evaluate a
 potential design’s performance using a network simulator prior to deploying it
 in an actual datacenter.
 
-![Figure 1](../../fat_topology.jpeg)
+![Figure 1](fat_topology.jpeg)
 
 ### 1.2. Problem Statement
 
