@@ -9,11 +9,19 @@ struct switch_t {
   double microsec_line_rate;
 };
 
-// get the delay time given lambda (average time between processing)
+/**
+* get the delay time for the current switch, incorporating the service delay and wait time
+*/
 uint64_t switch_get_delay(struct switch_t *s, uint64_t current_time);
 
+/** 
+* initialize a switch object, given the line rate in microseconds
+*/
 struct switch_t *switch_init(double microsec_line_rate);
 
+/**
+* free the memory utilize by the switch object
+*/
 void switch_free(struct switch_t *ps);
 
 #endif /* SWITCH_H */

@@ -6,6 +6,9 @@
 #include <stdio.h>
 #include <string.h>
 
+/**
+* Create the appropriate topology from the given data in the input file
+*/
 struct topology_t *topology_load(const char *filename,
                                  const size_t n_filename) {
   assert(filename != NULL);
@@ -153,6 +156,9 @@ struct topology_t *topology_load(const char *filename,
   return topo;
 }
 
+/**
+* Export the toplogy to a dot file, for visualization
+*/
 void topology_export_to_dot(const struct topology_t *topo, const char *filename,
                             const size_t n_filename) {
   assert(filename != NULL);
@@ -181,6 +187,9 @@ void topology_export_to_dot(const struct topology_t *topo, const char *filename,
   free(cpy_filename);
 }
 
+/**
+* Added data for switches in the topology
+*/
 void topology_init_switches(struct topology_t *pt, double microsec_line_rate) {
   register size_t i;
   for (i = 0; i < pt->n_switches; i++) {
@@ -188,6 +197,9 @@ void topology_init_switches(struct topology_t *pt, double microsec_line_rate) {
   }
 }
 
+/**
+* Added data for links in the topology
+*/
 void topology_init_links(struct topology_t *pt, double link_length,
                          double material_factor) {
   register size_t i;

@@ -9,8 +9,10 @@
 #include <time.h>
 #include "arrival.h"
 
-// The interevent times in a Poisson process form an iid sequence of exponential
-// RV with mean 1/λ.
+/**
+* The interevent times in a Poisson process form an iid sequence of exponential
+* RV with mean 1/λ.
+*/
 double get_arrival_time(double lambda) {
   double u = (double)rand() / (double)(RAND_MAX); // uniform from [0,1]
   double mean = 1 / lambda;          // mean of the exponential dist

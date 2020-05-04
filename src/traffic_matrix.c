@@ -4,6 +4,10 @@
 #include <stdio.h>
 #include <string.h>
 
+/**
+* Initialize a traffic matrix object,
+* given the size (number of nodes)
+*/
 struct traffic_matrix_t *traffic_matrix_init(const size_t n_nodes) {
   struct traffic_matrix_t *pm = malloc(sizeof(struct traffic_matrix_t));
   assert(pm != NULL);
@@ -20,6 +24,9 @@ struct traffic_matrix_t *traffic_matrix_init(const size_t n_nodes) {
   return pm;
 }
 
+/**
+* Free the memory utilize by the traffic matrix object
+*/
 void traffic_matrix_free(struct traffic_matrix_t *pm) {
   assert(pm != NULL);
 
@@ -30,6 +37,10 @@ void traffic_matrix_free(struct traffic_matrix_t *pm) {
   free(pm);
 }
 
+/**
+* Read the traffic from given file
+* and store the data in the initialized traffic matrix object
+*/
 struct traffic_matrix_t *traffic_matrix_from_file(const char *filename,
                                                   const size_t n_filename) {
   assert(filename != NULL);
@@ -91,6 +102,9 @@ struct traffic_matrix_t *traffic_matrix_from_file(const char *filename,
   return pm;
 }
 
+/**
+* Normalized the values of the elements in the traffic matrix object
+*/
 static void traffic_matrix_normalize(struct traffic_matrix_t *pm) {
   assert(pm != NULL);
   assert(pm->lst != NULL);
@@ -111,6 +125,9 @@ static void traffic_matrix_normalize(struct traffic_matrix_t *pm) {
   pm->normalized = true;
 }
 
+/**
+* Summing up the values of the elements in the traffic matrix object
+*/
 static void traffic_matrix_accumulate(struct traffic_matrix_t *pm) {
   assert(pm != NULL);
   assert(pm->lst != NULL);
@@ -128,6 +145,9 @@ static void traffic_matrix_accumulate(struct traffic_matrix_t *pm) {
   pm->cumulative = true;
 }
 
+/**
+* Set the source and destination using random sampling for traffic simulation
+*/
 void traffic_matrix_sample(struct traffic_matrix_t *pm, size_t *src,
                            size_t *dst) {
 
@@ -163,6 +183,10 @@ void traffic_matrix_sample(struct traffic_matrix_t *pm, size_t *src,
 
 #ifdef TRAFFIC_MATRIX_TEST
 
+/**
+* Testing - simulating the traffic using the matrix from file test.matrix, simulation data simulation.csv
+* and save the results in annotated.csv
+*/
 int main() {
 
   struct traffic_matrix_t *pm = traffic_matrix_from_file("test.matrix", 11);

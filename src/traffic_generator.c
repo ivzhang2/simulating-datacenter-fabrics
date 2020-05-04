@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+
+
 #define MAX_FILENAME 1024
 
 struct _thread_args_t {
@@ -24,6 +26,9 @@ struct _thread_args_t {
 
 static pthread_mutex_t lock;
 
+/**
+* write the threaded traffic generation (including the source, destination, next arrival time and next data flow size) to output file
+*/
 static void *_threaded_traffic_gen(void *args) {
   struct _thread_args_t *unpacked = (struct _thread_args_t *)args;
 
@@ -58,10 +63,10 @@ static void *_threaded_traffic_gen(void *args) {
   return NULL;
 }
 
-/*
-   Given: filename of the CDF, interarrival time between flows, and the
-   total simulation time (milliseconds) Returns large csv ("simulation.csv")
-   with interarrival times
+/**
+* Given: filename of the CDF, interarrival time between flows, and the
+* total simulation time (milliseconds) Returns large csv ("simulation.csv")
+* with interarrival times
 */
 static void generate_traffic(char *cdf_file, char *tm_file, char *output_file,
                              double interarrival_time,
@@ -121,6 +126,9 @@ static void generate_traffic(char *cdf_file, char *tm_file, char *output_file,
   free(threads);
 }
 
+/**
+* Testing - generate the traffic using the example cdf distrbution test_cdf.txt and simulation data simulation.csv
+*/
 int main() {
   generate_traffic("tests/test_cdf.txt", "tests/test.matrix",
                    "results/generated_trace.csv", 1.0, 100000.0, 1);

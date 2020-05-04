@@ -3,6 +3,9 @@
 #include <assert.h>
 #include <math.h>
 
+/** 
+* initialize a switch object, given the line rate in microseconds
+*/
 struct switch_t *switch_init(double microsec_line_rate) {
   struct switch_t *ps = malloc(sizeof(struct switch_t));
   assert(ps != NULL);
@@ -12,12 +15,17 @@ struct switch_t *switch_init(double microsec_line_rate) {
   return ps;
 }
 
+/**
+* free the memory utilize by the switch object
+*/
 void switch_free(struct switch_t *ps) {
   assert(ps != NULL);
   free(ps);
 }
 
-// get the delay time given lambda (average time between processing)
+/**
+* get the delay service time given lambda (average time between processing)
+*/
 static uint64_t service_delay(struct switch_t *s) {
   assert(s != NULL);
 
@@ -33,6 +41,9 @@ static uint64_t service_delay(struct switch_t *s) {
   return (uint64_t)wait_time;
 }
 
+/**
+* get the delay time for the current switch, incorporating the service delay and wait time
+*/
 uint64_t switch_get_delay(struct switch_t *s, uint64_t current_time) {
   uint64_t wait_time = service_delay(s);
 

@@ -5,6 +5,9 @@
 
 #include <assert.h>
 
+/**
+* get the next incoming packet, store its data and evaluate the incoming time (considering all the delays)
+*/
 void packet_traverse_next(struct packet_t *pp) {
 
   if (pp->state == PS_TERMINATED) {
@@ -36,6 +39,9 @@ void packet_traverse_next(struct packet_t *pp) {
   }
 }
 
+/**
+* Given the list of the incoming packets, get the next one (earliest) in line
+*/
 struct packet_t *packet_get_earliest(struct packet_t **const pparr,
                                      const size_t n_pparr) {
   assert(n_pparr > 0);
