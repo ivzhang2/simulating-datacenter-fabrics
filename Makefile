@@ -2,7 +2,7 @@ VPATH=src/:include/
 
 CC=gcc
 INCLUDE=include/
-CFLAGS=-I $(INCLUDE) -Wall -Werror
+CFLAGS=-I $(INCLUDE) -Wall -Werror -pthread
 LIB=-lm
 CC_CMD=$(CC) $(CFLAGS)
 

@@ -5,9 +5,9 @@
 #include <string.h>
 
 /**
-* Initialize a traffic matrix object,
-* given the size (number of nodes)
-*/
+ * Initialize a traffic matrix object,
+ * given the size (number of nodes)
+ */
 struct traffic_matrix_t *traffic_matrix_init(const size_t n_nodes) {
   struct traffic_matrix_t *pm = malloc(sizeof(struct traffic_matrix_t));
   assert(pm != NULL);
@@ -25,8 +25,8 @@ struct traffic_matrix_t *traffic_matrix_init(const size_t n_nodes) {
 }
 
 /**
-* Free the memory utilize by the traffic matrix object
-*/
+ * Free the memory utilize by the traffic matrix object
+ */
 void traffic_matrix_free(struct traffic_matrix_t *pm) {
   assert(pm != NULL);
 
@@ -38,9 +38,9 @@ void traffic_matrix_free(struct traffic_matrix_t *pm) {
 }
 
 /**
-* Read the traffic from given file
-* and store the data in the initialized traffic matrix object
-*/
+ * Read the traffic from given file
+ * and store the data in the initialized traffic matrix object
+ */
 struct traffic_matrix_t *traffic_matrix_from_file(const char *filename,
                                                   const size_t n_filename) {
   assert(filename != NULL);
@@ -103,8 +103,8 @@ struct traffic_matrix_t *traffic_matrix_from_file(const char *filename,
 }
 
 /**
-* Normalized the values of the elements in the traffic matrix object
-*/
+ * Normalized the values of the elements in the traffic matrix object
+ */
 static void traffic_matrix_normalize(struct traffic_matrix_t *pm) {
   assert(pm != NULL);
   assert(pm->lst != NULL);
@@ -126,8 +126,8 @@ static void traffic_matrix_normalize(struct traffic_matrix_t *pm) {
 }
 
 /**
-* Summing up the values of the elements in the traffic matrix object
-*/
+ * Summing up the values of the elements in the traffic matrix object
+ */
 static void traffic_matrix_accumulate(struct traffic_matrix_t *pm) {
   assert(pm != NULL);
   assert(pm->lst != NULL);
@@ -146,10 +146,10 @@ static void traffic_matrix_accumulate(struct traffic_matrix_t *pm) {
 }
 
 /**
-* Set the source and destination using random sampling for traffic simulation
-*/
+ * Set the source and destination using random sampling for traffic simulation
+ */
 void traffic_matrix_sample(struct traffic_matrix_t *pm, size_t *src,
-                           size_t *dst) {
+                           size_t *dst, unsigned int *pseed) {
 
   assert(pm != NULL);
   assert(pm->lst != NULL);
@@ -164,7 +164,7 @@ void traffic_matrix_sample(struct traffic_matrix_t *pm, size_t *src,
     traffic_matrix_accumulate(pm);
   }
 
-  double y_sample = (double)rand() / (double)RAND_MAX;
+  double y_sample = (double)rand_r(pseed) / (double)RAND_MAX;
 
   size_t index = 0;
   size_t len = pm->n_nodes * pm->n_nodes;
@@ -184,9 +184,9 @@ void traffic_matrix_sample(struct traffic_matrix_t *pm, size_t *src,
 #ifdef TRAFFIC_MATRIX_TEST
 
 /**
-* Testing - simulating the traffic using the matrix from file test.matrix, simulation data simulation.csv
-* and save the results in annotated.csv
-*/
+ * Testing - simulating the traffic using the matrix from file test.matrix,
+ * simulation data simulation.csv and save the results in annotated.csv
+ */
 int main() {
 
   struct traffic_matrix_t *pm = traffic_matrix_from_file("test.matrix", 11);

@@ -7,8 +7,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-
-
 #define MAX_FILENAME 1024
 
 struct _thread_args_t {
@@ -22,13 +20,16 @@ struct _thread_args_t {
 
   double ia_time;
   double sim_time;
+
+  unsigned int seed;
 };
 
 static pthread_mutex_t lock;
 
 /**
-* write the threaded traffic generation (including the source, destination, next arrival time and next data flow size) to output file
-*/
+ * write the threaded traffic generation (including the source, destination,
+ * next arrival time and next data flow size) to output file
+ */
 static void *_threaded_traffic_gen(void *args) {
   struct _thread_args_t *unpacked = (struct _thread_args_t *)args;
 
@@ -45,13 +46,13 @@ static void *_threaded_traffic_gen(void *args) {
   pthread_mutex_unlock(&lock);
 
   while (unpacked->sim_time > 0) {
-    double next_arrival = get_arrival_time(unpacked->ia_time);
-    double next_data_flow = get_next_flow(data_flows);
+    double next_arrival = get_arrival_time(unpacked->ia_time, &unpacked->seed);
+    double next_data_flow = get_next_flow(data_flows, &unpacked->seed);
 
     size_t src;
     size_t dst;
 
-    traffic_matrix_sample(pm, &src, &dst);
+    traffic_matrix_sample(pm, &src, &dst, &unpacked->seed);
     unpacked->sim_time -= next_arrival;
 
     /* src,dst,arrival time, data size */
@@ -64,18 +65,17 @@ static void *_threaded_traffic_gen(void *args) {
 }
 
 /**
-* Given: filename of the CDF, interarrival time between flows, and the
-* total simulation time (milliseconds) Returns large csv ("simulation.csv")
-* with interarrival times
-*/
+ * Given: filename of the CDF, interarrival time between flows, and the
+ * total simulation time (milliseconds) Returns large csv ("simulation.csv")
+ * with interarrival times
+ */
 static void generate_traffic(char *cdf_file, char *tm_file, char *output_file,
                              double interarrival_time,
                              double total_simulation_time, size_t n_threads) {
-  double seed = 42;
 
   // set the seed from the top of the simulation to be used for all functions
   // downstreeam (not attaching it poissonprocess arrival time only)
-  srand(seed);
+  unsigned int seed = 42;
 
   pthread_t *threads = malloc(sizeof(pthread_t) * n_threads);
   struct _thread_args_t *targs =
@@ -87,6 +87,8 @@ static void generate_traffic(char *cdf_file, char *tm_file, char *output_file,
 
   register size_t i;
   for (i = 0; i < n_threads; i++) {
+    targs[i].seed = seed;
+
     targs[i].sim_time = total_simulation_time / n_threads;
     targs[i].ia_time = interarrival_time;
 
@@ -127,9 +129,12 @@ static void generate_traffic(char *cdf_file, char *tm_file, char *output_file,
 }
 
 /**
-* Testing - generate the traffic using the example cdf distrbution test_cdf.txt and simulation data simulation.csv
-*/
-int main() {
+ * Testing - generate the traffic using the example cdf distrbution test_cdf.txt
+ * and simulation data simulation.csv
+ */
+int main(int argc, char **argv) {
+  assert(argc == 3);
   generate_traffic("tests/test_cdf.txt", "tests/test.matrix",
-                   "results/generated_trace.csv", 1.0, 100000.0, 1);
+                   "results/generated_trace.csv", 1.0, atof(argv[1]),
+                   atol(argv[2]));
 }

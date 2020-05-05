@@ -11,4 +11,4 @@
 
 // The interevent times in a Poisson process form an iid sequence of exponential
 // RV with mean 1/λ.
-double get_arrival_time(double lambda);
+double get_arrival_time(double lambda, unsigned int *pseed);
