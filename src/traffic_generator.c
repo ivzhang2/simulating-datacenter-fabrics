@@ -1,4 +1,5 @@
 #include "arrival.h"
+#include "common.h"
 #include "flow.h"
 #include "traffic_matrix.h"
 
@@ -6,8 +7,6 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <time.h>
-
-#define MAX_FILENAME 1024
 
 struct _thread_args_t {
   char *cdf_file;

@@ -26,7 +26,7 @@ void switch_free(struct switch_t *ps) {
 /**
  * get the delay service time given lambda (average time between processing)
  */
-static uint64_t service_delay(struct switch_t *s) {
+static double service_delay(struct switch_t *s) {
   assert(s != NULL);
 
   assert(s->microsec_line_rate != 0);
@@ -38,16 +38,16 @@ static uint64_t service_delay(struct switch_t *s) {
 
   double u = (double)rand() / (double)(RAND_MAX); // uniform from [0,1]
   double wait_time = -log(u) / lambda;
-  return (uint64_t)wait_time;
+  return wait_time;
 }
 
 /**
  * get the delay time for the current switch, incorporating the service delay
  * and wait time
  */
-uint64_t switch_get_delay(struct switch_t *s, uint64_t current_time,
-                          uint64_t pkt_size) {
-  uint64_t wait_time = 0.0;
+double switch_get_delay(struct switch_t *s, double current_time,
+                        double pkt_size) {
+  double wait_time = 0.0;
 
   size_t i;
   for (i = 0; i < pkt_size * 8; i++) {

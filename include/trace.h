@@ -10,4 +10,5 @@ struct trace_t {
   size_t n_pparr;
 };
 
+struct trace_t *trace_load(const char *filename, const size_t n_filename);
 #endif /* TRACE_H */
