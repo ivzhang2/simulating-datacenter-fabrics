@@ -1,0 +1,36 @@
+\hypertarget{switch_8c}{}\doxysection{src/switch.c File Reference}
+\label{switch_8c}\index{src/switch.c@{src/switch.c}}
+{\ttfamily \#include \char`\"{}switch.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structswitch__t}{switch\+\_\+t}} $\ast$ \mbox{\hyperlink{switch_8c_a92456dbc8b958529c6c6cce4370a5957}{switch\+\_\+init}} (double microsec\+\_\+line\+\_\+rate)
+\item 
+void \mbox{\hyperlink{switch_8c_a33de749eda35655c362076a64b2aeb2e}{switch\+\_\+free}} (struct \mbox{\hyperlink{structswitch__t}{switch\+\_\+t}} $\ast$ps)
+\item 
+double \mbox{\hyperlink{switch_8c_a243d4a2e35627c37e72ed2a32dd86d44}{switch\+\_\+get\+\_\+delay}} (struct \mbox{\hyperlink{structswitch__t}{switch\+\_\+t}} $\ast$s, double current\+\_\+time, double pkt\+\_\+size)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{switch_8c_a33de749eda35655c362076a64b2aeb2e}\label{switch_8c_a33de749eda35655c362076a64b2aeb2e}} 
+\index{switch.c@{switch.c}!switch\_free@{switch\_free}}
+\index{switch\_free@{switch\_free}!switch.c@{switch.c}}
+\doxysubsubsection{\texorpdfstring{switch\_free()}{switch\_free()}}
+{\footnotesize\ttfamily void switch\+\_\+free (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structswitch__t}{switch\+\_\+t}} $\ast$}]{ps }\end{DoxyParamCaption})}
+
+free the memory utilize by the switch object \mbox{\Hypertarget{switch_8c_a243d4a2e35627c37e72ed2a32dd86d44}\label{switch_8c_a243d4a2e35627c37e72ed2a32dd86d44}} 
+\index{switch.c@{switch.c}!switch\_get\_delay@{switch\_get\_delay}}
+\index{switch\_get\_delay@{switch\_get\_delay}!switch.c@{switch.c}}
+\doxysubsubsection{\texorpdfstring{switch\_get\_delay()}{switch\_get\_delay()}}
+{\footnotesize\ttfamily double switch\+\_\+get\+\_\+delay (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structswitch__t}{switch\+\_\+t}} $\ast$}]{s,  }\item[{double}]{current\+\_\+time,  }\item[{double}]{pkt\+\_\+size }\end{DoxyParamCaption})}
+
+get the delay time for the current switch, incorporating the service delay and wait time \mbox{\Hypertarget{switch_8c_a92456dbc8b958529c6c6cce4370a5957}\label{switch_8c_a92456dbc8b958529c6c6cce4370a5957}} 
+\index{switch.c@{switch.c}!switch\_init@{switch\_init}}
+\index{switch\_init@{switch\_init}!switch.c@{switch.c}}
+\doxysubsubsection{\texorpdfstring{switch\_init()}{switch\_init()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structswitch__t}{switch\+\_\+t}}$\ast$ switch\+\_\+init (\begin{DoxyParamCaption}\item[{double}]{microsec\+\_\+line\+\_\+rate }\end{DoxyParamCaption})}
+
+initialize a switch object, given the line rate in microseconds 

@@ -1,0 +1,47 @@
+\hypertarget{topology_8h}{}\doxysection{include/topology.h File Reference}
+\label{topology_8h}\index{include/topology.h@{include/topology.h}}
+{\ttfamily \#include \char`\"{}network\+\_\+object.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structtopology__t}{topology\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structtopology__t}{topology\+\_\+t}} $\ast$ \mbox{\hyperlink{topology_8h_a7e5c5e0d3f80e10c6db8d1f97a0f7d38}{topology\+\_\+load}} (const char $\ast$filename, const size\+\_\+t n\+\_\+filename)
+\item 
+void \mbox{\hyperlink{topology_8h_a7ff447654baa1886e018ca9118eb4828}{topology\+\_\+export\+\_\+to\+\_\+dot}} (const struct \mbox{\hyperlink{structtopology__t}{topology\+\_\+t}} $\ast$topo, const char $\ast$filename, const size\+\_\+t n\+\_\+filename)
+\item 
+void \mbox{\hyperlink{topology_8h_af0dfd88a13e9f5099c82b1d82f123d33}{topology\+\_\+init\+\_\+switches}} (struct \mbox{\hyperlink{structtopology__t}{topology\+\_\+t}} $\ast$pt, double microsec\+\_\+line\+\_\+rate)
+\item 
+void \mbox{\hyperlink{topology_8h_af415d86fbb72c0a0f1b315e9590705db}{topology\+\_\+init\+\_\+links}} (struct \mbox{\hyperlink{structtopology__t}{topology\+\_\+t}} $\ast$pt, double link\+\_\+length, double material\+\_\+factor)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{topology_8h_a7ff447654baa1886e018ca9118eb4828}\label{topology_8h_a7ff447654baa1886e018ca9118eb4828}} 
+\index{topology.h@{topology.h}!topology\_export\_to\_dot@{topology\_export\_to\_dot}}
+\index{topology\_export\_to\_dot@{topology\_export\_to\_dot}!topology.h@{topology.h}}
+\doxysubsubsection{\texorpdfstring{topology\_export\_to\_dot()}{topology\_export\_to\_dot()}}
+{\footnotesize\ttfamily void topology\+\_\+export\+\_\+to\+\_\+dot (\begin{DoxyParamCaption}\item[{const struct \mbox{\hyperlink{structtopology__t}{topology\+\_\+t}} $\ast$}]{topo,  }\item[{const char $\ast$}]{filename,  }\item[{const size\+\_\+t}]{n\+\_\+filename }\end{DoxyParamCaption})}
+
+Export the toplogy to a dot file, for visualization \mbox{\Hypertarget{topology_8h_af415d86fbb72c0a0f1b315e9590705db}\label{topology_8h_af415d86fbb72c0a0f1b315e9590705db}} 
+\index{topology.h@{topology.h}!topology\_init\_links@{topology\_init\_links}}
+\index{topology\_init\_links@{topology\_init\_links}!topology.h@{topology.h}}
+\doxysubsubsection{\texorpdfstring{topology\_init\_links()}{topology\_init\_links()}}
+{\footnotesize\ttfamily void topology\+\_\+init\+\_\+links (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structtopology__t}{topology\+\_\+t}} $\ast$}]{pt,  }\item[{double}]{link\+\_\+length,  }\item[{double}]{material\+\_\+factor }\end{DoxyParamCaption})}
+
+Added data for links in the topology \mbox{\Hypertarget{topology_8h_af0dfd88a13e9f5099c82b1d82f123d33}\label{topology_8h_af0dfd88a13e9f5099c82b1d82f123d33}} 
+\index{topology.h@{topology.h}!topology\_init\_switches@{topology\_init\_switches}}
+\index{topology\_init\_switches@{topology\_init\_switches}!topology.h@{topology.h}}
+\doxysubsubsection{\texorpdfstring{topology\_init\_switches()}{topology\_init\_switches()}}
+{\footnotesize\ttfamily void topology\+\_\+init\+\_\+switches (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structtopology__t}{topology\+\_\+t}} $\ast$}]{pt,  }\item[{double}]{microsec\+\_\+line\+\_\+rate }\end{DoxyParamCaption})}
+
+Added data for switches in the topology \mbox{\Hypertarget{topology_8h_a7e5c5e0d3f80e10c6db8d1f97a0f7d38}\label{topology_8h_a7e5c5e0d3f80e10c6db8d1f97a0f7d38}} 
+\index{topology.h@{topology.h}!topology\_load@{topology\_load}}
+\index{topology\_load@{topology\_load}!topology.h@{topology.h}}
+\doxysubsubsection{\texorpdfstring{topology\_load()}{topology\_load()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structtopology__t}{topology\+\_\+t}}$\ast$ topology\+\_\+load (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename,  }\item[{const size\+\_\+t}]{n\+\_\+filename }\end{DoxyParamCaption})}
+
+Create the appropriate topology from the given data in the input file 

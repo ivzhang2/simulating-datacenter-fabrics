@@ -1,0 +1,44 @@
+\hypertarget{network__object_8c}{}\doxysection{src/network\+\_\+object.c File Reference}
+\label{network__object_8c}\index{src/network\_object.c@{src/network\_object.c}}
+{\ttfamily \#include \char`\"{}network\+\_\+object.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}} $\ast$ \mbox{\hyperlink{network__object_8c_a47c99198978ea4f315971946195a761d}{network\+\_\+object\+\_\+init}} (const enum \mbox{\hyperlink{network__object_8h_a3af7baddc641a3b4f5a9189b589eccf7}{object\+\_\+type\+\_\+t}} type, const size\+\_\+t id)
+\item 
+void \mbox{\hyperlink{network__object_8c_a186fbb5f85f6559127895d3735a8137a}{network\+\_\+object\+\_\+set\+\_\+name}} (struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}} $\ast$a, const char $\ast$name)
+\item 
+void \mbox{\hyperlink{network__object_8c_a8f790491e278423b3e207fbca5227f51}{network\+\_\+object\+\_\+connect}} (struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}} $\ast$a, struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}} $\ast$b)
+\item 
+void \mbox{\hyperlink{network__object_8c_a215fb99505776e40fb2fe3ef9afb6bfd}{network\+\_\+object\+\_\+free}} (struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}} $\ast$a)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{network__object_8c_a8f790491e278423b3e207fbca5227f51}\label{network__object_8c_a8f790491e278423b3e207fbca5227f51}} 
+\index{network\_object.c@{network\_object.c}!network\_object\_connect@{network\_object\_connect}}
+\index{network\_object\_connect@{network\_object\_connect}!network\_object.c@{network\_object.c}}
+\doxysubsubsection{\texorpdfstring{network\_object\_connect()}{network\_object\_connect()}}
+{\footnotesize\ttfamily void network\+\_\+object\+\_\+connect (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}} $\ast$}]{a,  }\item[{struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}} $\ast$}]{b }\end{DoxyParamCaption})}
+
+Given 2 network objects, added two-\/sided connections between the objects \mbox{\Hypertarget{network__object_8c_a215fb99505776e40fb2fe3ef9afb6bfd}\label{network__object_8c_a215fb99505776e40fb2fe3ef9afb6bfd}} 
+\index{network\_object.c@{network\_object.c}!network\_object\_free@{network\_object\_free}}
+\index{network\_object\_free@{network\_object\_free}!network\_object.c@{network\_object.c}}
+\doxysubsubsection{\texorpdfstring{network\_object\_free()}{network\_object\_free()}}
+{\footnotesize\ttfamily void network\+\_\+object\+\_\+free (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}} $\ast$}]{a }\end{DoxyParamCaption})}
+
+Free the memeory used by the network object \mbox{\Hypertarget{network__object_8c_a47c99198978ea4f315971946195a761d}\label{network__object_8c_a47c99198978ea4f315971946195a761d}} 
+\index{network\_object.c@{network\_object.c}!network\_object\_init@{network\_object\_init}}
+\index{network\_object\_init@{network\_object\_init}!network\_object.c@{network\_object.c}}
+\doxysubsubsection{\texorpdfstring{network\_object\_init()}{network\_object\_init()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}}$\ast$ network\+\_\+object\+\_\+init (\begin{DoxyParamCaption}\item[{const enum \mbox{\hyperlink{network__object_8h_a3af7baddc641a3b4f5a9189b589eccf7}{object\+\_\+type\+\_\+t}}}]{type,  }\item[{const size\+\_\+t}]{id }\end{DoxyParamCaption})}
+
+Initialize a network object, given the size and the type (switch/link/server) \mbox{\Hypertarget{network__object_8c_a186fbb5f85f6559127895d3735a8137a}\label{network__object_8c_a186fbb5f85f6559127895d3735a8137a}} 
+\index{network\_object.c@{network\_object.c}!network\_object\_set\_name@{network\_object\_set\_name}}
+\index{network\_object\_set\_name@{network\_object\_set\_name}!network\_object.c@{network\_object.c}}
+\doxysubsubsection{\texorpdfstring{network\_object\_set\_name()}{network\_object\_set\_name()}}
+{\footnotesize\ttfamily void network\+\_\+object\+\_\+set\+\_\+name (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}} $\ast$}]{a,  }\item[{const char $\ast$}]{name }\end{DoxyParamCaption})}
+
+Set a name for the network object 

@@ -1,0 +1,39 @@
+\hypertarget{link_8c}{}\doxysection{src/link.c File Reference}
+\label{link_8c}\index{src/link.c@{src/link.c}}
+{\ttfamily \#include \char`\"{}link.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structlink__t}{link\+\_\+t}} $\ast$ \mbox{\hyperlink{link_8c_ab92efdbc297e7db2d74181cc0d3565ba}{link\+\_\+init}} (double link\+\_\+length, double material\+\_\+factor\+\_\+speed\+Of\+Light)
+\item 
+void \mbox{\hyperlink{link_8c_a63dfa09924970a6d91439856afc73eb6}{link\+\_\+free}} (struct \mbox{\hyperlink{structlink__t}{link\+\_\+t}} $\ast$pl)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{link_8c_a63dfa09924970a6d91439856afc73eb6}\label{link_8c_a63dfa09924970a6d91439856afc73eb6}} 
+\index{link.c@{link.c}!link\_free@{link\_free}}
+\index{link\_free@{link\_free}!link.c@{link.c}}
+\doxysubsubsection{\texorpdfstring{link\_free()}{link\_free()}}
+{\footnotesize\ttfamily void link\+\_\+free (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structlink__t}{link\+\_\+t}} $\ast$}]{pl }\end{DoxyParamCaption})}
+
+free the memory utilized by the link object \mbox{\Hypertarget{link_8c_ab92efdbc297e7db2d74181cc0d3565ba}\label{link_8c_ab92efdbc297e7db2d74181cc0d3565ba}} 
+\index{link.c@{link.c}!link\_init@{link\_init}}
+\index{link\_init@{link\_init}!link.c@{link.c}}
+\doxysubsubsection{\texorpdfstring{link\_init()}{link\_init()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structlink__t}{link\+\_\+t}}$\ast$ link\+\_\+init (\begin{DoxyParamCaption}\item[{double}]{link\+\_\+length,  }\item[{double}]{material\+\_\+factor\+\_\+speed\+Of\+Light }\end{DoxyParamCaption})}
+
+calculates the link delay per link with the formula\+: (length of link) / (factor of speed of light $\ast$ speed of light)
+
+params\+:
+
+
+\begin{DoxyItemize}
+\item link\+\_\+length\+: length of each link (assuming each is the same length) in meters
+\item double material\+\_\+factor\+\_\+speed\+Of\+Light\+: factor of speed of light of material
+\end{DoxyItemize}
+
+returns struct link \+: link object with characteristics of link and delay 

@@ -1,0 +1,29 @@
+\hypertarget{packet_8c}{}\doxysection{src/packet.c File Reference}
+\label{packet_8c}\index{src/packet.c@{src/packet.c}}
+{\ttfamily \#include \char`\"{}packet.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}link.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}switch.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{packet_8c_a1165fc5e5b40c72c7507e02a609b1043}{packet\+\_\+traverse\+\_\+next}} (struct \mbox{\hyperlink{structpacket__t}{packet\+\_\+t}} $\ast$pp)
+\item 
+struct \mbox{\hyperlink{structpacket__t}{packet\+\_\+t}} $\ast$ \mbox{\hyperlink{packet_8c_a539b924a8d7dc894f101ade7ec923e2b}{packet\+\_\+get\+\_\+earliest}} (struct \mbox{\hyperlink{structpacket__t}{packet\+\_\+t}} $\ast$$\ast$const pparr, const size\+\_\+t n\+\_\+pparr)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{packet_8c_a539b924a8d7dc894f101ade7ec923e2b}\label{packet_8c_a539b924a8d7dc894f101ade7ec923e2b}} 
+\index{packet.c@{packet.c}!packet\_get\_earliest@{packet\_get\_earliest}}
+\index{packet\_get\_earliest@{packet\_get\_earliest}!packet.c@{packet.c}}
+\doxysubsubsection{\texorpdfstring{packet\_get\_earliest()}{packet\_get\_earliest()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structpacket__t}{packet\+\_\+t}}$\ast$ packet\+\_\+get\+\_\+earliest (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structpacket__t}{packet\+\_\+t}} $\ast$$\ast$const}]{pparr,  }\item[{const size\+\_\+t}]{n\+\_\+pparr }\end{DoxyParamCaption})}
+
+Given the list of the incoming packets, get the next one (earliest) in line \mbox{\Hypertarget{packet_8c_a1165fc5e5b40c72c7507e02a609b1043}\label{packet_8c_a1165fc5e5b40c72c7507e02a609b1043}} 
+\index{packet.c@{packet.c}!packet\_traverse\_next@{packet\_traverse\_next}}
+\index{packet\_traverse\_next@{packet\_traverse\_next}!packet.c@{packet.c}}
+\doxysubsubsection{\texorpdfstring{packet\_traverse\_next()}{packet\_traverse\_next()}}
+{\footnotesize\ttfamily void packet\+\_\+traverse\+\_\+next (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structpacket__t}{packet\+\_\+t}} $\ast$}]{pp }\end{DoxyParamCaption})}
+
+get the next incoming packet, store its data and evaluate the incoming time (considering all the delays) 
