@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <string.h>
 
-int is_same_network_object(struct network_object_t *a,
-                           struct network_object_t *b) {
+static int is_same_network_object(struct network_object_t *a,
+                                  struct network_object_t *b) {
   enum object_type_t a_type = a->type;
   enum object_type_t b_type = b->type;
   size_t a_id = a->id;
@@ -16,11 +16,10 @@ int is_same_network_object(struct network_object_t *a,
   return 0;
 }
 
-int is_in_topology(struct network_object_t *a, struct topology_t *topo) {
+static int is_in_topology(struct network_object_t *a, struct topology_t *topo) {
   enum object_type_t type = a->type;
   if (type == SWITCH) {
     for (int i = 0; i < topo->n_switches; i++) {
-      ;
       if (is_same_network_object(a, topo->switches[i])) {
         return 1;
       }
@@ -42,8 +41,8 @@ int is_in_topology(struct network_object_t *a, struct topology_t *topo) {
   return 0;
 }
 
-struct topology_t *create_new_topology(struct network_object_t **path,
-                                       size_t n_path) {
+static struct topology_t *create_new_topology(struct network_object_t **path,
+                                              size_t n_path) {
   struct topology_t *topo = malloc(sizeof(struct topology_t));
 
   topo->n_links = 0;
@@ -90,9 +89,9 @@ struct topology_t *create_new_topology(struct network_object_t **path,
   return topo;
 }
 
-struct topology_t *union_topology(struct topology_t *topo,
-                                  struct network_object_t **path,
-                                  size_t n_path) {
+static struct topology_t *union_topology(struct topology_t *topo,
+                                         struct network_object_t **path,
+                                         size_t n_path) {
   struct topology_t *temp = malloc(sizeof(struct topology_t));
   temp->n_links = topo->n_links;
   temp->n_switches = topo->n_switches;
@@ -148,60 +147,73 @@ struct topology_t *union_topology(struct topology_t *topo,
    matches, union the who PATH Else make new topology)
 */
 
-struct simulation_runs_t *generate_sim_runs(struct packet_t **p_arr,
-                                            size_t num_packets) {
+struct simulation_runs_t *generate_sim_runs(struct trace_t *in_tarr) {
+  struct packet_t **p_arr = in_tarr->pparr;
+  size_t num_packets = in_tarr->n_pparr;
+
   struct simulation_runs_t *sim_runs = malloc(sizeof(struct simulation_runs_t));
-  struct packet_t **packet_arr = malloc(sizeof(struct packet_t *));
+  assert(sim_runs != NULL);
+
+  struct trace_t *tarr = malloc(sizeof(struct trace_t));
+  assert(tarr != NULL);
+
   struct topology_t **topo_arr = malloc(sizeof(struct topology_t));
+  assert(topo_arr != NULL);
 
   size_t num_topology = 0; // number of topologies stored in arrays
 
   // 1 if path was merge, else 0 to create new topology and packet array
-  int match = 0;
+  int match;
 
-  // maintains the count of each packet array in packet_arr
-  size_t *count = malloc(sizeof(int) * num_packets);
-  assert(count != NULL);
+  register size_t i;
+  register size_t j;
+  register size_t k;
 
-  for (int i = 0; i < num_packets; ++i) {
+  for (i = 0; i < num_packets; ++i) {
+
     match = 0;
-    for (int j = 0; j < num_topology; j++) {
+
+    for (j = 0; j < num_topology; j++) {
       if (match) {
         break;
       }
-      for (int k = 0; k < p_arr[i]->n_path; k++) {
+      for (k = 0; k < p_arr[i]->n_path; k++) {
         if (is_in_topology(p_arr[i]->path[k], topo_arr[j])) {
           topo_arr[j] =
               union_topology(topo_arr[j], p_arr[i]->path, p_arr[i]->n_path);
           match = 1;
-          packet_arr[j] =
-              realloc(packet_arr[j], sizeof(struct packet_t) * (count[j] + 1));
-          packet_arr[j][count[j]] = *p_arr[i];
-          count[j] += 1;
+          tarr[j].pparr = realloc(tarr[j].pparr, sizeof(struct packet_t *) *
+                                                     (tarr[j].n_pparr + 1));
+          tarr[j].pparr[tarr[j].n_pparr] = p_arr[i];
+          tarr[j].n_pparr += 1;
           break;
         }
       }
     }
 
-    if (num_topology == 0 || !match) {
-      packet_arr =
-          realloc(packet_arr, sizeof(struct packet_t *) * (num_topology + 1));
+    if (!match) {
+      tarr = realloc(tarr, sizeof(struct trace_t) * (num_topology + 1));
+
       topo_arr =
           realloc(topo_arr, sizeof(struct topology_t *) * (num_topology + 1));
-      packet_arr[num_topology] = p_arr[i];
-      count[i] = 1;
+
+      tarr[num_topology].pparr = malloc(sizeof(struct packet_t *));
+      tarr[num_topology].pparr[0] = p_arr[i];
+
+      tarr[num_topology].n_pparr = 1;
+
       topo_arr[num_topology] =
           create_new_topology(p_arr[i]->path, p_arr[i]->n_path);
+
       num_topology += 1;
     }
   }
 
-  sim_runs->parr_arr = packet_arr;
+  sim_runs->tarr = tarr;
   sim_runs->topoarr = topo_arr;
 
   sim_runs->n_topoarr = num_topology;
-  sim_runs->n_parr_arr = num_topology;
-  sim_runs->n_parr_counts_arr = count;
+  sim_runs->n_tarr = num_topology;
 
   return sim_runs;
 }

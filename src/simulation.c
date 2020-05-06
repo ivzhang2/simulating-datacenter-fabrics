@@ -9,5 +9,5 @@ int main() {
 
   /* 10 Mbps switches */
   topology_init_switches(pt, 1000);
-  topology_init_links(2, 0.65);
+  topology_init_links(pt, 2, 0.65);
 }

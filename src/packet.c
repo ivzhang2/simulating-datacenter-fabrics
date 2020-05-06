@@ -6,8 +6,9 @@
 #include <assert.h>
 
 /**
-* get the next incoming packet, store its data and evaluate the incoming time (considering all the delays)
-*/
+ * get the next incoming packet, store its data and evaluate the incoming time
+ * (considering all the delays)
+ */
 void packet_traverse_next(struct packet_t *pp) {
 
   if (pp->state == PS_TERMINATED) {
@@ -23,7 +24,7 @@ void packet_traverse_next(struct packet_t *pp) {
 
   if (obj->type == SWITCH) {
     struct switch_t *ps = (struct switch_t *)obj->data;
-    pp->curr_time += switch_get_delay(ps, pp->curr_time);
+    pp->curr_time += switch_get_delay(ps, pp->curr_time, pp->size);
   }
 
   if (obj->type == LINK) {
@@ -40,8 +41,8 @@ void packet_traverse_next(struct packet_t *pp) {
 }
 
 /**
-* Given the list of the incoming packets, get the next one (earliest) in line
-*/
+ * Given the list of the incoming packets, get the next one (earliest) in line
+ */
 struct packet_t *packet_get_earliest(struct packet_t **const pparr,
                                      const size_t n_pparr) {
   assert(n_pparr > 0);
