@@ -7,8 +7,8 @@
 #include <string.h>
 
 /**
-* Create the appropriate topology from the given data in the input file
-*/
+ * Create the appropriate topology from the given data in the input file
+ */
 struct topology_t *topology_load(const char *filename,
                                  const size_t n_filename) {
   assert(filename != NULL);
@@ -157,8 +157,8 @@ struct topology_t *topology_load(const char *filename,
 }
 
 /**
-* Export the toplogy to a dot file, for visualization
-*/
+ * Export the toplogy to a dot file, for visualization
+ */
 void topology_export_to_dot(const struct topology_t *topo, const char *filename,
                             const size_t n_filename) {
   assert(filename != NULL);
@@ -188,8 +188,8 @@ void topology_export_to_dot(const struct topology_t *topo, const char *filename,
 }
 
 /**
-* Added data for switches in the topology
-*/
+ * Added data for switches in the topology
+ */
 void topology_init_switches(struct topology_t *pt, double microsec_line_rate) {
   register size_t i;
   for (i = 0; i < pt->n_switches; i++) {
@@ -198,8 +198,8 @@ void topology_init_switches(struct topology_t *pt, double microsec_line_rate) {
 }
 
 /**
-* Added data for links in the topology
-*/
+ * Added data for links in the topology
+ */
 void topology_init_links(struct topology_t *pt, double link_length,
                          double material_factor) {
   register size_t i;
@@ -207,4 +207,20 @@ void topology_init_links(struct topology_t *pt, double link_length,
   for (i = 0; i < pt->n_links; i++) {
     pt->links[i]->data = link_init(link_length, material_factor);
   }
+}
+
+void topology_free(struct topology_t *pt) {
+  register size_t i;
+
+  for (i = 0; i < pt->n_switches; i++) {
+    free(pt->switches[i]->data);
+  }
+
+  for (i = 0; i < pt->n_links; i++) {
+    free(pt->links[i]->data);
+  }
+
+  free(pt->switches);
+  free(pt->links);
+  free(pt->servers);
 }
