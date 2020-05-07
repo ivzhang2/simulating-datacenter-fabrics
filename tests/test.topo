@@ -1,6 +1,6 @@
-switches 2	
-servers 3	
-links 4
+switches 4
+servers 5
+links 8
 connect l0 h0
 connect l0 s0
 connect l1 h1
@@ -9,3 +9,11 @@ connect l2 h0
 connect l2 s1
 connect l3 s1
 connect l3 h2
+connect l4 h0
+connect l4 s2
+connect l5 h3
+connect l5 s2
+connect l6 h0
+connect l6 s3
+connect l7 h4
+connect l7 s3

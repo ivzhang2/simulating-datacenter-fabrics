@@ -23,6 +23,13 @@ static void route_benchmark_topology(struct trace_t *ptrace,
       malloc(sizeof(struct network_object_t *) * path_length);
   assert(path_2 != NULL);
 
+  struct network_object_t **path_3 =
+      malloc(sizeof(struct network_object_t *) * path_length);
+  assert(path_3 != NULL);
+
+  struct network_object_t **path_4 =
+      malloc(sizeof(struct network_object_t *) * path_length);
+
   path_1[0] = ptopo->servers[0];
   path_1[1] = ptopo->links[0];
   path_1[2] = ptopo->switches[0];
@@ -34,6 +41,18 @@ static void route_benchmark_topology(struct trace_t *ptrace,
   path_2[2] = ptopo->switches[1];
   path_2[3] = ptopo->links[3];
   path_2[4] = ptopo->servers[2];
+
+  path_3[0] = ptopo->servers[0];
+  path_3[1] = ptopo->links[4];
+  path_3[2] = ptopo->switches[2];
+  path_3[3] = ptopo->links[5];
+  path_3[4] = ptopo->servers[3];
+
+  path_4[0] = ptopo->servers[0];
+  path_4[1] = ptopo->links[6];
+  path_4[2] = ptopo->switches[3];
+  path_4[3] = ptopo->links[7];
+  path_4[4] = ptopo->servers[4];
 
   register size_t i;
 
@@ -49,6 +68,12 @@ static void route_benchmark_topology(struct trace_t *ptrace,
     } else if (ppkt->receive_id == 2) {
       ppkt->receive_id = ptopo->servers[2]->id;
       ppkt->path = path_2;
+    } else if (ppkt->receive_id == 3) {
+      ppkt->receive_id = ptopo->servers[3]->id;
+      ppkt->path = path_3;
+    } else if (ppkt->receive_id == 4) {
+      ppkt->receive_id = ptopo->servers[4]->id;
+      ppkt->path = path_4;
     } else {
       assert(0);
     }
@@ -93,12 +118,14 @@ int main() {
   char *topo_fname = "tests/test.topo";
   struct topology_t *ptopo = topology_load(topo_fname, strlen(topo_fname));
 
+  char *topo_dot_name = "results/test.topo.dot";
+  topology_export_to_dot(ptopo, topo_dot_name, strlen(topo_dot_name));
+
   /* 10 Mbps switches */
   topology_init_switches(ptopo, MICROSEC_LINE_RATE);
   topology_init_links(ptopo, 2, 0.65);
 
   char *trace_fname = "results/generated_trace.csv.0";
-
   struct trace_t *ptrace = trace_load(trace_fname, strlen(trace_fname));
 
   printf("Loaded trace with %zu packets.\n", ptrace->n_pparr);
@@ -112,8 +139,8 @@ int main() {
 
   struct simulation_runs_t *pruns = generate_sim_runs(ptrace);
 
-  assert(pruns->n_tarr == 2);
-  assert(pruns->n_topoarr == 2);
+  assert(pruns->n_tarr == 4);
+  assert(pruns->n_topoarr == 4);
 
   simulation_runs_free(pruns);
   topology_free(ptopo);

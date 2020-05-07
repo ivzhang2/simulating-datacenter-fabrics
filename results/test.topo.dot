@@ -1,0 +1,10 @@
+graph topology {
+	h0 -- s0;
+	h1 -- s0;
+	h0 -- s1;
+	s1 -- h2;
+	h0 -- s2;
+	h3 -- s2;
+	h0 -- s3;
+	h4 -- s3;
+}
