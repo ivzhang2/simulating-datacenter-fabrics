@@ -223,4 +223,6 @@ void topology_free(struct topology_t *pt) {
   free(pt->switches);
   free(pt->links);
   free(pt->servers);
+
+  free(pt);
 }
