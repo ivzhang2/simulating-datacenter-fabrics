@@ -1,10 +1,13 @@
 VPATH=src/:include/
 
 CC=gcc
+MPICC=mpicc
 INCLUDE=include/
 CFLAGS=-I $(INCLUDE) -Wall -Werror -pthread
+MPICFLAGS=-I $(INCLUDE) -Wall -Werror 
 LIB=-lm
 CC_CMD=$(CC) $(CFLAGS)
+MPI_CC_CMD=$(MPICC) $(MPICFLAGS)
 
 # Note: apparently, linked library files should go *after* source files
 
@@ -16,10 +19,14 @@ DOC_DIR=docs
 SRCS=$(wildcard *.c)
 DEPS=$(srcs:.c=.d)
 
-all: dir_tgt simulation traffic_generator
+all: dir_tgt simulation traffic_generator simulation_mpi
 
 simulation: flow.o arrival.o network_object.o topology.o switch.o link.o packet.o trace.o simulation_runs.o simulation.o
 	$(CC_CMD) $(^:%.o=$(OBJ_DIR)/%.o) -o $(BIN_DIR)/$@ $(LIB)
+
+simulation_mpi: flow.o arrival.o network_object.o topology.o switch.o link.o packet.o trace.o simulation_runs.o simulation_mpi.o
+	$(MPI_CC_CMD) $(^:%.o=$(OBJ_DIR)/%.o) -o $(BIN_DIR)/$@ $(LIB)
+
 
 run: simulation
 	$(BIN_DIR)/simulation
