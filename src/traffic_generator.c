@@ -32,7 +32,7 @@ static pthread_mutex_t lock;
 static void *_threaded_traffic_gen(void *args) {
   struct _thread_args_t *unpacked = (struct _thread_args_t *)args;
 
-  FILE *pout = fopen(unpacked->output_file, "w+");
+  FILE *pout = fopen(unpacked->output_file, "w");
   assert(pout != NULL);
 
   pthread_mutex_lock(&lock);

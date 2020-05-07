@@ -30,6 +30,7 @@ struct trace_t *trace_load(const char *filename, const size_t n_filename) {
 
   size_t n_pkt = 0;
   double abs_arrival = 0.0;
+  size_t flow_id = 0;
 
   while ((read = getline(&line, &len, pf)) != -1) {
     struct packet_t *pp = packet_init();
@@ -64,6 +65,8 @@ struct trace_t *trace_load(const char *filename, const size_t n_filename) {
     pp->start_time = abs_arrival;
     pp->curr_time = abs_arrival;
 
+    pp->flow_id = flow_id;
+
     token = strtok(NULL, "\n");
 
     double flow_size = atof(token);
@@ -76,7 +79,7 @@ struct trace_t *trace_load(const char *filename, const size_t n_filename) {
     while (flow_size > 0) {
       pt->pparr = realloc(pt->pparr, sizeof(struct packet_t *) * (n_pkt + 1));
 
-      struct packet_t *pp_more = malloc(sizeof(struct packet_t));
+      struct packet_t *pp_more = packet_init();
       assert(pp_more != NULL);
 
       pt->pparr[n_pkt] = pp_more;
@@ -90,11 +93,15 @@ struct trace_t *trace_load(const char *filename, const size_t n_filename) {
       pp_more->start_time = curr_time;
       pp_more->curr_time = curr_time;
 
+      pp_more->flow_id = flow_id;
+
       curr_size = flow_size > MTU ? MTU : flow_size;
 
       pp_more->size = curr_size;
       flow_size -= curr_size;
     }
+
+    ++flow_id;
   }
 
   fclose(pf);

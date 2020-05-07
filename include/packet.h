@@ -37,6 +37,8 @@ struct packet_t {
   size_t curr_pos;
 
   enum packet_state_t state;
+
+  size_t flow_id;
 };
 
 struct packet_t *packet_init(void);

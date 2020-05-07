@@ -3,19 +3,25 @@
 #include "topology.h"
 #include "trace.h"
 
+#include <assert.h>
 #include <stdio.h>
 #include <string.h>
 
 static void route_benchmark_topology(struct trace_t *ptrace,
                                      struct topology_t *ptopo) {
 
+  assert(ptrace != NULL);
+  assert(ptopo != NULL);
+
   size_t path_length = 5;
 
   struct network_object_t **path_1 =
       malloc(sizeof(struct network_object_t *) * path_length);
+  assert(path_1 != NULL);
 
   struct network_object_t **path_2 =
       malloc(sizeof(struct network_object_t *) * path_length);
+  assert(path_2 != NULL);
 
   path_1[0] = ptopo->servers[0];
   path_1[1] = ptopo->links[0];
@@ -49,6 +55,40 @@ static void route_benchmark_topology(struct trace_t *ptrace,
   }
 }
 
+static void complete_flows(struct trace_t *ptrace, struct topology_t *ptopo) {
+  assert(ptrace != NULL);
+  assert(ptopo != NULL);
+
+  struct packet_t *ppkt = packet_get_earliest(ptrace->pparr, ptrace->n_pparr);
+
+  while (ppkt->state != PS_TERMINATED) {
+    packet_traverse_next(ppkt);
+    ppkt = packet_get_earliest(ptrace->pparr, ptrace->n_pparr);
+  }
+}
+
+static void export_flow_times(struct trace_t *ptrace, const char *out_fname,
+                              const size_t n_out_fname) {
+
+  assert(ptrace != NULL);
+  assert(out_fname != NULL);
+
+  char *cpy_fname = strndup(out_fname, n_out_fname);
+
+  FILE *pf = fopen(cpy_fname, "w");
+  assert(pf != NULL);
+
+  register size_t i;
+  for (i = 0; i < ptrace->n_pparr; i++) {
+    struct packet_t *ppkt = ptrace->pparr[i];
+    fprintf(pf, "%zu,%zu,%zu,%lf,%lf\n", ppkt->flow_id, ppkt->send_id,
+            ppkt->receive_id, ppkt->start_time, ppkt->curr_time);
+  }
+
+  fclose(pf);
+  free(cpy_fname);
+}
+
 int main() {
   char *topo_fname = "tests/test.topo";
   struct topology_t *ptopo = topology_load(topo_fname, strlen(topo_fname));
@@ -64,6 +104,11 @@ int main() {
   printf("Loaded trace with %zu packets.\n", ptrace->n_pparr);
 
   route_benchmark_topology(ptrace, ptopo);
+
+  complete_flows(ptrace, ptopo);
+
+  char *result_fname = "results/fct.csv";
+  export_flow_times(ptrace, result_fname, strlen(result_fname));
 
   struct simulation_runs_t *pruns = generate_sim_runs(ptrace);
 
