@@ -11,4 +11,6 @@ struct trace_t {
 };
 
 struct trace_t *trace_load(const char *filename, const size_t n_filename);
+
+void trace_free(struct trace_t *pt);
 #endif /* TRACE_H */

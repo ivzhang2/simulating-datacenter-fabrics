@@ -1,0 +1,49 @@
+\hypertarget{traffic__matrix_8h}{}\doxysection{include/traffic\+\_\+matrix.h File Reference}
+\label{traffic__matrix_8h}\index{include/traffic\_matrix.h@{include/traffic\_matrix.h}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structtraffic__matrix__t}{traffic\+\_\+matrix\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structtraffic__matrix__t}{traffic\+\_\+matrix\+\_\+t}} $\ast$ \mbox{\hyperlink{traffic__matrix_8h_ac34b59976ad10d3b542c671aec3ebad7}{traffic\+\_\+matrix\+\_\+init}} (const size\+\_\+t n\+\_\+nodes)
+\item 
+void \mbox{\hyperlink{traffic__matrix_8h_a99bcf39ec79d6c5bd951a6dc97721d81}{traffic\+\_\+matrix\+\_\+free}} (struct \mbox{\hyperlink{structtraffic__matrix__t}{traffic\+\_\+matrix\+\_\+t}} $\ast$pm)
+\item 
+struct \mbox{\hyperlink{structtraffic__matrix__t}{traffic\+\_\+matrix\+\_\+t}} $\ast$ \mbox{\hyperlink{traffic__matrix_8h_adcbf9629c0fb28cc5b78d4e817d239aa}{traffic\+\_\+matrix\+\_\+from\+\_\+file}} (const char $\ast$filename, const size\+\_\+t n\+\_\+filename)
+\item 
+void \mbox{\hyperlink{traffic__matrix_8h_aab6427c9d01a71bc9c4ab82f558d2a67}{traffic\+\_\+matrix\+\_\+sample}} (struct \mbox{\hyperlink{structtraffic__matrix__t}{traffic\+\_\+matrix\+\_\+t}} $\ast$pm, size\+\_\+t $\ast$src, size\+\_\+t $\ast$dst, unsigned int $\ast$pseed)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{traffic__matrix_8h_a99bcf39ec79d6c5bd951a6dc97721d81}\label{traffic__matrix_8h_a99bcf39ec79d6c5bd951a6dc97721d81}} 
+\index{traffic\_matrix.h@{traffic\_matrix.h}!traffic\_matrix\_free@{traffic\_matrix\_free}}
+\index{traffic\_matrix\_free@{traffic\_matrix\_free}!traffic\_matrix.h@{traffic\_matrix.h}}
+\doxysubsubsection{\texorpdfstring{traffic\_matrix\_free()}{traffic\_matrix\_free()}}
+{\footnotesize\ttfamily void traffic\+\_\+matrix\+\_\+free (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structtraffic__matrix__t}{traffic\+\_\+matrix\+\_\+t}} $\ast$}]{pm }\end{DoxyParamCaption})}
+
+Free the memory utilize by the traffic matrix object \mbox{\Hypertarget{traffic__matrix_8h_adcbf9629c0fb28cc5b78d4e817d239aa}\label{traffic__matrix_8h_adcbf9629c0fb28cc5b78d4e817d239aa}} 
+\index{traffic\_matrix.h@{traffic\_matrix.h}!traffic\_matrix\_from\_file@{traffic\_matrix\_from\_file}}
+\index{traffic\_matrix\_from\_file@{traffic\_matrix\_from\_file}!traffic\_matrix.h@{traffic\_matrix.h}}
+\doxysubsubsection{\texorpdfstring{traffic\_matrix\_from\_file()}{traffic\_matrix\_from\_file()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structtraffic__matrix__t}{traffic\+\_\+matrix\+\_\+t}}$\ast$ traffic\+\_\+matrix\+\_\+from\+\_\+file (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename,  }\item[{const size\+\_\+t}]{n\+\_\+filename }\end{DoxyParamCaption})}
+
+Read the traffic from given file and store the data in the initialized traffic matrix object \mbox{\Hypertarget{traffic__matrix_8h_ac34b59976ad10d3b542c671aec3ebad7}\label{traffic__matrix_8h_ac34b59976ad10d3b542c671aec3ebad7}} 
+\index{traffic\_matrix.h@{traffic\_matrix.h}!traffic\_matrix\_init@{traffic\_matrix\_init}}
+\index{traffic\_matrix\_init@{traffic\_matrix\_init}!traffic\_matrix.h@{traffic\_matrix.h}}
+\doxysubsubsection{\texorpdfstring{traffic\_matrix\_init()}{traffic\_matrix\_init()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structtraffic__matrix__t}{traffic\+\_\+matrix\+\_\+t}}$\ast$ traffic\+\_\+matrix\+\_\+init (\begin{DoxyParamCaption}\item[{const size\+\_\+t}]{n\+\_\+nodes }\end{DoxyParamCaption})}
+
+Initialize a traffic matrix object, given the size (number of nodes) \mbox{\Hypertarget{traffic__matrix_8h_aab6427c9d01a71bc9c4ab82f558d2a67}\label{traffic__matrix_8h_aab6427c9d01a71bc9c4ab82f558d2a67}} 
+\index{traffic\_matrix.h@{traffic\_matrix.h}!traffic\_matrix\_sample@{traffic\_matrix\_sample}}
+\index{traffic\_matrix\_sample@{traffic\_matrix\_sample}!traffic\_matrix.h@{traffic\_matrix.h}}
+\doxysubsubsection{\texorpdfstring{traffic\_matrix\_sample()}{traffic\_matrix\_sample()}}
+{\footnotesize\ttfamily void traffic\+\_\+matrix\+\_\+sample (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structtraffic__matrix__t}{traffic\+\_\+matrix\+\_\+t}} $\ast$}]{pm,  }\item[{size\+\_\+t $\ast$}]{src,  }\item[{size\+\_\+t $\ast$}]{dst,  }\item[{unsigned int $\ast$}]{pseed }\end{DoxyParamCaption})}
+
+Set the source and destination using random sampling for traffic simulation 

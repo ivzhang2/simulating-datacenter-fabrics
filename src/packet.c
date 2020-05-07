@@ -5,6 +5,16 @@
 
 #include <assert.h>
 
+struct packet_t *packet_init(void) {
+  struct packet_t *ppkt = malloc(sizeof(struct packet_t));
+  assert(ppkt != NULL);
+
+  ppkt->ttl = TTL_MAX;
+  ppkt->curr_pos = 0;
+  ppkt->state = PS_PENDING;
+
+  return ppkt;
+}
 /**
  * get the next incoming packet, store its data and evaluate the incoming time
  * (considering all the delays)

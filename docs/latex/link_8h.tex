@@ -1,0 +1,55 @@
+\hypertarget{link_8h}{}\doxysection{include/link.h File Reference}
+\label{link_8h}\index{include/link.h@{include/link.h}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structlink__t}{link\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{link_8h_a7b5cb503d827fae6b26874e21254d68f}{S\+P\+E\+E\+D\+\_\+\+O\+F\+\_\+\+L\+I\+G\+HT}}~299792458
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structlink__t}{link\+\_\+t}} $\ast$ \mbox{\hyperlink{link_8h_ab92efdbc297e7db2d74181cc0d3565ba}{link\+\_\+init}} (double link\+\_\+length, double material\+\_\+factor\+\_\+speed\+Of\+Light)
+\item 
+void \mbox{\hyperlink{link_8h_a63dfa09924970a6d91439856afc73eb6}{link\+\_\+free}} (struct \mbox{\hyperlink{structlink__t}{link\+\_\+t}} $\ast$pl)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{link_8h_a7b5cb503d827fae6b26874e21254d68f}\label{link_8h_a7b5cb503d827fae6b26874e21254d68f}} 
+\index{link.h@{link.h}!SPEED\_OF\_LIGHT@{SPEED\_OF\_LIGHT}}
+\index{SPEED\_OF\_LIGHT@{SPEED\_OF\_LIGHT}!link.h@{link.h}}
+\doxysubsubsection{\texorpdfstring{SPEED\_OF\_LIGHT}{SPEED\_OF\_LIGHT}}
+{\footnotesize\ttfamily \#define S\+P\+E\+E\+D\+\_\+\+O\+F\+\_\+\+L\+I\+G\+HT~299792458}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{link_8h_a63dfa09924970a6d91439856afc73eb6}\label{link_8h_a63dfa09924970a6d91439856afc73eb6}} 
+\index{link.h@{link.h}!link\_free@{link\_free}}
+\index{link\_free@{link\_free}!link.h@{link.h}}
+\doxysubsubsection{\texorpdfstring{link\_free()}{link\_free()}}
+{\footnotesize\ttfamily void link\+\_\+free (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structlink__t}{link\+\_\+t}} $\ast$}]{pl }\end{DoxyParamCaption})}
+
+free the memory utilized by the link object \mbox{\Hypertarget{link_8h_ab92efdbc297e7db2d74181cc0d3565ba}\label{link_8h_ab92efdbc297e7db2d74181cc0d3565ba}} 
+\index{link.h@{link.h}!link\_init@{link\_init}}
+\index{link\_init@{link\_init}!link.h@{link.h}}
+\doxysubsubsection{\texorpdfstring{link\_init()}{link\_init()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structlink__t}{link\+\_\+t}}$\ast$ link\+\_\+init (\begin{DoxyParamCaption}\item[{double}]{link\+\_\+length,  }\item[{double}]{material\+\_\+factor\+\_\+speed\+Of\+Light }\end{DoxyParamCaption})}
+
+calculates the link delay per link with the formula\+: (length of link) / (factor of speed of light $\ast$ speed of light)
+
+params\+:
+
+
+\begin{DoxyItemize}
+\item link\+\_\+length\+: length of each link (assuming each is the same length) in meters
+\item double material\+\_\+factor\+\_\+speed\+Of\+Light\+: factor of speed of light of material
+\end{DoxyItemize}
+
+returns struct link \+: link object with characteristics of link and delay 

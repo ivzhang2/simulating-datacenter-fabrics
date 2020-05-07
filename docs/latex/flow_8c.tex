@@ -1,0 +1,53 @@
+\hypertarget{flow_8c}{}\doxysection{src/flow.c File Reference}
+\label{flow_8c}\index{src/flow.c@{src/flow.c}}
+{\ttfamily \#include \char`\"{}flow.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{flow_8c_a1aea5bb13363fbead9ca4c562e2b49bf}{append}} (struct \mbox{\hyperlink{structflow__node__t}{flow\+\_\+node\+\_\+t}} $\ast$$\ast$head\+\_\+ref, int new\+\_\+flowsize, float new\+\_\+cdf)
+\item 
+void \mbox{\hyperlink{flow_8c_ab603a5686dbee1ca3bc8d919bb5f89e8}{print\+\_\+list}} (struct \mbox{\hyperlink{structflow__node__t}{flow\+\_\+node\+\_\+t}} $\ast$node)
+\item 
+void \mbox{\hyperlink{flow_8c_ae601a6269ceaf7f459b58e78f31bf572}{flow\+\_\+free}} (struct \mbox{\hyperlink{structflow__node__t}{flow\+\_\+node\+\_\+t}} $\ast$node)
+\item 
+struct \mbox{\hyperlink{structflow__node__t}{flow\+\_\+node\+\_\+t}} $\ast$ \mbox{\hyperlink{flow_8c_a17b35a607c910f649b1d59229775437c}{init\+\_\+flow}} (char $\ast$filename)
+\item 
+float \mbox{\hyperlink{flow_8c_ae503e42bcf0d3a4b3806f00de5a8180c}{get\+\_\+next\+\_\+flow}} (struct \mbox{\hyperlink{structflow__node__t}{flow\+\_\+node\+\_\+t}} $\ast$node, unsigned int $\ast$pseed)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{flow_8c_a1aea5bb13363fbead9ca4c562e2b49bf}\label{flow_8c_a1aea5bb13363fbead9ca4c562e2b49bf}} 
+\index{flow.c@{flow.c}!append@{append}}
+\index{append@{append}!flow.c@{flow.c}}
+\doxysubsubsection{\texorpdfstring{append()}{append()}}
+{\footnotesize\ttfamily void append (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structflow__node__t}{flow\+\_\+node\+\_\+t}} $\ast$$\ast$}]{head\+\_\+ref,  }\item[{int}]{new\+\_\+flowsize,  }\item[{float}]{new\+\_\+cdf }\end{DoxyParamCaption})}
+
+Add the next flow to the current flow object (append node to the linked list) \mbox{\Hypertarget{flow_8c_ae601a6269ceaf7f459b58e78f31bf572}\label{flow_8c_ae601a6269ceaf7f459b58e78f31bf572}} 
+\index{flow.c@{flow.c}!flow\_free@{flow\_free}}
+\index{flow\_free@{flow\_free}!flow.c@{flow.c}}
+\doxysubsubsection{\texorpdfstring{flow\_free()}{flow\_free()}}
+{\footnotesize\ttfamily void flow\+\_\+free (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structflow__node__t}{flow\+\_\+node\+\_\+t}} $\ast$}]{node }\end{DoxyParamCaption})}
+
+Free the memory utlized by the flow object (linked list) \mbox{\Hypertarget{flow_8c_ae503e42bcf0d3a4b3806f00de5a8180c}\label{flow_8c_ae503e42bcf0d3a4b3806f00de5a8180c}} 
+\index{flow.c@{flow.c}!get\_next\_flow@{get\_next\_flow}}
+\index{get\_next\_flow@{get\_next\_flow}!flow.c@{flow.c}}
+\doxysubsubsection{\texorpdfstring{get\_next\_flow()}{get\_next\_flow()}}
+{\footnotesize\ttfamily float get\+\_\+next\+\_\+flow (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structflow__node__t}{flow\+\_\+node\+\_\+t}} $\ast$}]{node,  }\item[{unsigned int $\ast$}]{pseed }\end{DoxyParamCaption})}
+
+Generate a random flow size according to the C\+DF, using inverse C\+DF method \mbox{\Hypertarget{flow_8c_a17b35a607c910f649b1d59229775437c}\label{flow_8c_a17b35a607c910f649b1d59229775437c}} 
+\index{flow.c@{flow.c}!init\_flow@{init\_flow}}
+\index{init\_flow@{init\_flow}!flow.c@{flow.c}}
+\doxysubsubsection{\texorpdfstring{init\_flow()}{init\_flow()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structflow__node__t}{flow\+\_\+node\+\_\+t}}$\ast$ init\+\_\+flow (\begin{DoxyParamCaption}\item[{char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+Given the file (with data about the distribution of the flow), this function will read the flow from the given C\+DF distribution \mbox{\Hypertarget{flow_8c_ab603a5686dbee1ca3bc8d919bb5f89e8}\label{flow_8c_ab603a5686dbee1ca3bc8d919bb5f89e8}} 
+\index{flow.c@{flow.c}!print\_list@{print\_list}}
+\index{print\_list@{print\_list}!flow.c@{flow.c}}
+\doxysubsubsection{\texorpdfstring{print\_list()}{print\_list()}}
+{\footnotesize\ttfamily void print\+\_\+list (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structflow__node__t}{flow\+\_\+node\+\_\+t}} $\ast$}]{node }\end{DoxyParamCaption})}
+
+Print the list of the flow object (linked list) 

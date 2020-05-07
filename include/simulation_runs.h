@@ -36,4 +36,9 @@ struct simulation_runs_t {
 
 struct simulation_runs_t *generate_sim_runs(struct trace_t *in_tarr);
 
+/* Note that this assumes you have an original copy of the loaded topology and
+ * trace which you are freeing. So it doesn't free the objects pointed to by the
+ * trace and topology arrays */
+void simulation_runs_free(struct simulation_runs_t *ps);
+
 #endif /* SIMULATION_RUNS_H */

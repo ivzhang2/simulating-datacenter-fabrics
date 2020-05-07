@@ -1,0 +1,55 @@
+\hypertarget{topology_8c}{}\doxysection{src/topology.c File Reference}
+\label{topology_8c}\index{src/topology.c@{src/topology.c}}
+{\ttfamily \#include \char`\"{}topology.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}link.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}switch.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structtopology__t}{topology\+\_\+t}} $\ast$ \mbox{\hyperlink{topology_8c_a7e5c5e0d3f80e10c6db8d1f97a0f7d38}{topology\+\_\+load}} (const char $\ast$filename, const size\+\_\+t n\+\_\+filename)
+\item 
+void \mbox{\hyperlink{topology_8c_a7ff447654baa1886e018ca9118eb4828}{topology\+\_\+export\+\_\+to\+\_\+dot}} (const struct \mbox{\hyperlink{structtopology__t}{topology\+\_\+t}} $\ast$topo, const char $\ast$filename, const size\+\_\+t n\+\_\+filename)
+\item 
+void \mbox{\hyperlink{topology_8c_af0dfd88a13e9f5099c82b1d82f123d33}{topology\+\_\+init\+\_\+switches}} (struct \mbox{\hyperlink{structtopology__t}{topology\+\_\+t}} $\ast$pt, double microsec\+\_\+line\+\_\+rate)
+\item 
+void \mbox{\hyperlink{topology_8c_af415d86fbb72c0a0f1b315e9590705db}{topology\+\_\+init\+\_\+links}} (struct \mbox{\hyperlink{structtopology__t}{topology\+\_\+t}} $\ast$pt, double link\+\_\+length, double material\+\_\+factor)
+\item 
+void \mbox{\hyperlink{topology_8c_a60ecfb4052eca6aa5262f6a79111367b}{topology\+\_\+free}} (struct \mbox{\hyperlink{structtopology__t}{topology\+\_\+t}} $\ast$pt)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{topology_8c_a7ff447654baa1886e018ca9118eb4828}\label{topology_8c_a7ff447654baa1886e018ca9118eb4828}} 
+\index{topology.c@{topology.c}!topology\_export\_to\_dot@{topology\_export\_to\_dot}}
+\index{topology\_export\_to\_dot@{topology\_export\_to\_dot}!topology.c@{topology.c}}
+\doxysubsubsection{\texorpdfstring{topology\_export\_to\_dot()}{topology\_export\_to\_dot()}}
+{\footnotesize\ttfamily void topology\+\_\+export\+\_\+to\+\_\+dot (\begin{DoxyParamCaption}\item[{const struct \mbox{\hyperlink{structtopology__t}{topology\+\_\+t}} $\ast$}]{topo,  }\item[{const char $\ast$}]{filename,  }\item[{const size\+\_\+t}]{n\+\_\+filename }\end{DoxyParamCaption})}
+
+Export the toplogy to a dot file, for visualization \mbox{\Hypertarget{topology_8c_a60ecfb4052eca6aa5262f6a79111367b}\label{topology_8c_a60ecfb4052eca6aa5262f6a79111367b}} 
+\index{topology.c@{topology.c}!topology\_free@{topology\_free}}
+\index{topology\_free@{topology\_free}!topology.c@{topology.c}}
+\doxysubsubsection{\texorpdfstring{topology\_free()}{topology\_free()}}
+{\footnotesize\ttfamily void topology\+\_\+free (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structtopology__t}{topology\+\_\+t}} $\ast$}]{pt }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{topology_8c_af415d86fbb72c0a0f1b315e9590705db}\label{topology_8c_af415d86fbb72c0a0f1b315e9590705db}} 
+\index{topology.c@{topology.c}!topology\_init\_links@{topology\_init\_links}}
+\index{topology\_init\_links@{topology\_init\_links}!topology.c@{topology.c}}
+\doxysubsubsection{\texorpdfstring{topology\_init\_links()}{topology\_init\_links()}}
+{\footnotesize\ttfamily void topology\+\_\+init\+\_\+links (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structtopology__t}{topology\+\_\+t}} $\ast$}]{pt,  }\item[{double}]{link\+\_\+length,  }\item[{double}]{material\+\_\+factor }\end{DoxyParamCaption})}
+
+Added data for links in the topology \mbox{\Hypertarget{topology_8c_af0dfd88a13e9f5099c82b1d82f123d33}\label{topology_8c_af0dfd88a13e9f5099c82b1d82f123d33}} 
+\index{topology.c@{topology.c}!topology\_init\_switches@{topology\_init\_switches}}
+\index{topology\_init\_switches@{topology\_init\_switches}!topology.c@{topology.c}}
+\doxysubsubsection{\texorpdfstring{topology\_init\_switches()}{topology\_init\_switches()}}
+{\footnotesize\ttfamily void topology\+\_\+init\+\_\+switches (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structtopology__t}{topology\+\_\+t}} $\ast$}]{pt,  }\item[{double}]{microsec\+\_\+line\+\_\+rate }\end{DoxyParamCaption})}
+
+Added data for switches in the topology \mbox{\Hypertarget{topology_8c_a7e5c5e0d3f80e10c6db8d1f97a0f7d38}\label{topology_8c_a7e5c5e0d3f80e10c6db8d1f97a0f7d38}} 
+\index{topology.c@{topology.c}!topology\_load@{topology\_load}}
+\index{topology\_load@{topology\_load}!topology.c@{topology.c}}
+\doxysubsubsection{\texorpdfstring{topology\_load()}{topology\_load()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structtopology__t}{topology\+\_\+t}}$\ast$ topology\+\_\+load (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename,  }\item[{const size\+\_\+t}]{n\+\_\+filename }\end{DoxyParamCaption})}
+
+Create the appropriate topology from the given data in the input file 

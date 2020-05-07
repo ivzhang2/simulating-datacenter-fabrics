@@ -4,6 +4,17 @@
 #include <stdio.h>
 #include <string.h>
 
+void simulation_runs_free(struct simulation_runs_t *ps) {
+  free(ps->tarr);
+
+  register size_t i;
+  for (i = 0; i < ps->n_topoarr; i++) {
+    free(ps->topoarr[i]);
+  }
+
+  free(ps);
+}
+
 static int is_same_network_object(struct network_object_t *a,
                                   struct network_object_t *b) {
   enum object_type_t a_type = a->type;
@@ -18,6 +29,7 @@ static int is_same_network_object(struct network_object_t *a,
 
 static int is_in_topology(struct network_object_t *a, struct topology_t *topo) {
   enum object_type_t type = a->type;
+
   if (type == SWITCH) {
     for (int i = 0; i < topo->n_switches; i++) {
       if (is_same_network_object(a, topo->switches[i])) {
@@ -27,12 +39,6 @@ static int is_in_topology(struct network_object_t *a, struct topology_t *topo) {
   } else if (type == LINK) {
     for (int i = 0; i < topo->n_links; i++) {
       if (is_same_network_object(a, topo->links[i])) {
-        return 1;
-      }
-    }
-  } else {
-    for (int i = 0; i < topo->n_servers; i++) {
-      if (is_same_network_object(a, topo->servers[i])) {
         return 1;
       }
     }

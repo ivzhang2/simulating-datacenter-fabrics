@@ -74,7 +74,7 @@ struct traffic_matrix_t *traffic_matrix_from_file(const char *filename,
       if (i == 0) {
         str_val = strtok(line, ",");
       } else if (i == pm->n_nodes - 1) {
-        str_val = strtok(line, "\n");
+        str_val = strtok(NULL, "\n");
       } else {
         str_val = strtok(NULL, ",");
       }
@@ -172,8 +172,6 @@ void traffic_matrix_sample(struct traffic_matrix_t *pm, size_t *src,
   while (pm->lst[index] <= y_sample && index < len) {
     index++;
   }
-
-  index = index == 0 ? 0 : index - 1;
 
   *src = index / pm->n_nodes;
   *dst = index % pm->n_nodes;

@@ -1,0 +1,92 @@
+\hypertarget{network__object_8h}{}\doxysection{include/network\+\_\+object.h File Reference}
+\label{network__object_8h}\index{include/network\_object.h@{include/network\_object.h}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{network__object_8h_a718cac4971bc17444284da877de605b3}{O\+B\+J\+\_\+\+N\+A\+M\+E\+\_\+\+S\+I\+ZE}}~255
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{network__object_8h_a3af7baddc641a3b4f5a9189b589eccf7}{object\+\_\+type\+\_\+t}} \{ \mbox{\hyperlink{network__object_8h_a3af7baddc641a3b4f5a9189b589eccf7a67c96b24b23bcb408bae7626730a04b7}{S\+E\+R\+V\+ER}}, 
+\mbox{\hyperlink{network__object_8h_a3af7baddc641a3b4f5a9189b589eccf7af2fe1bf26da6f8a451f054e30b3ce0f3}{L\+I\+NK}}, 
+\mbox{\hyperlink{network__object_8h_a3af7baddc641a3b4f5a9189b589eccf7a53396ea1193548270407675ea4eeee2b}{S\+W\+I\+T\+CH}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}} $\ast$ \mbox{\hyperlink{network__object_8h_a47c99198978ea4f315971946195a761d}{network\+\_\+object\+\_\+init}} (const enum \mbox{\hyperlink{network__object_8h_a3af7baddc641a3b4f5a9189b589eccf7}{object\+\_\+type\+\_\+t}} type, const size\+\_\+t id)
+\item 
+void \mbox{\hyperlink{network__object_8h_a186fbb5f85f6559127895d3735a8137a}{network\+\_\+object\+\_\+set\+\_\+name}} (struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}} $\ast$a, const char $\ast$name)
+\item 
+void \mbox{\hyperlink{network__object_8h_a8f790491e278423b3e207fbca5227f51}{network\+\_\+object\+\_\+connect}} (struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}} $\ast$a, struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}} $\ast$b)
+\item 
+void \mbox{\hyperlink{network__object_8h_a215fb99505776e40fb2fe3ef9afb6bfd}{network\+\_\+object\+\_\+free}} (struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}} $\ast$a)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{network__object_8h_a718cac4971bc17444284da877de605b3}\label{network__object_8h_a718cac4971bc17444284da877de605b3}} 
+\index{network\_object.h@{network\_object.h}!OBJ\_NAME\_SIZE@{OBJ\_NAME\_SIZE}}
+\index{OBJ\_NAME\_SIZE@{OBJ\_NAME\_SIZE}!network\_object.h@{network\_object.h}}
+\doxysubsubsection{\texorpdfstring{OBJ\_NAME\_SIZE}{OBJ\_NAME\_SIZE}}
+{\footnotesize\ttfamily \#define O\+B\+J\+\_\+\+N\+A\+M\+E\+\_\+\+S\+I\+ZE~255}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{network__object_8h_a3af7baddc641a3b4f5a9189b589eccf7}\label{network__object_8h_a3af7baddc641a3b4f5a9189b589eccf7}} 
+\index{network\_object.h@{network\_object.h}!object\_type\_t@{object\_type\_t}}
+\index{object\_type\_t@{object\_type\_t}!network\_object.h@{network\_object.h}}
+\doxysubsubsection{\texorpdfstring{object\_type\_t}{object\_type\_t}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{network__object_8h_a3af7baddc641a3b4f5a9189b589eccf7}{object\+\_\+type\+\_\+t}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SERVER@{SERVER}!network\_object.h@{network\_object.h}}\index{network\_object.h@{network\_object.h}!SERVER@{SERVER}}}\mbox{\Hypertarget{network__object_8h_a3af7baddc641a3b4f5a9189b589eccf7a67c96b24b23bcb408bae7626730a04b7}\label{network__object_8h_a3af7baddc641a3b4f5a9189b589eccf7a67c96b24b23bcb408bae7626730a04b7}} 
+S\+E\+R\+V\+ER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LINK@{LINK}!network\_object.h@{network\_object.h}}\index{network\_object.h@{network\_object.h}!LINK@{LINK}}}\mbox{\Hypertarget{network__object_8h_a3af7baddc641a3b4f5a9189b589eccf7af2fe1bf26da6f8a451f054e30b3ce0f3}\label{network__object_8h_a3af7baddc641a3b4f5a9189b589eccf7af2fe1bf26da6f8a451f054e30b3ce0f3}} 
+L\+I\+NK&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SWITCH@{SWITCH}!network\_object.h@{network\_object.h}}\index{network\_object.h@{network\_object.h}!SWITCH@{SWITCH}}}\mbox{\Hypertarget{network__object_8h_a3af7baddc641a3b4f5a9189b589eccf7a53396ea1193548270407675ea4eeee2b}\label{network__object_8h_a3af7baddc641a3b4f5a9189b589eccf7a53396ea1193548270407675ea4eeee2b}} 
+S\+W\+I\+T\+CH&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{network__object_8h_a8f790491e278423b3e207fbca5227f51}\label{network__object_8h_a8f790491e278423b3e207fbca5227f51}} 
+\index{network\_object.h@{network\_object.h}!network\_object\_connect@{network\_object\_connect}}
+\index{network\_object\_connect@{network\_object\_connect}!network\_object.h@{network\_object.h}}
+\doxysubsubsection{\texorpdfstring{network\_object\_connect()}{network\_object\_connect()}}
+{\footnotesize\ttfamily void network\+\_\+object\+\_\+connect (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}} $\ast$}]{a,  }\item[{struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}} $\ast$}]{b }\end{DoxyParamCaption})}
+
+Given 2 network objects, added two-\/sided connections between the objects \mbox{\Hypertarget{network__object_8h_a215fb99505776e40fb2fe3ef9afb6bfd}\label{network__object_8h_a215fb99505776e40fb2fe3ef9afb6bfd}} 
+\index{network\_object.h@{network\_object.h}!network\_object\_free@{network\_object\_free}}
+\index{network\_object\_free@{network\_object\_free}!network\_object.h@{network\_object.h}}
+\doxysubsubsection{\texorpdfstring{network\_object\_free()}{network\_object\_free()}}
+{\footnotesize\ttfamily void network\+\_\+object\+\_\+free (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}} $\ast$}]{a }\end{DoxyParamCaption})}
+
+Free the memeory used by the network object \mbox{\Hypertarget{network__object_8h_a47c99198978ea4f315971946195a761d}\label{network__object_8h_a47c99198978ea4f315971946195a761d}} 
+\index{network\_object.h@{network\_object.h}!network\_object\_init@{network\_object\_init}}
+\index{network\_object\_init@{network\_object\_init}!network\_object.h@{network\_object.h}}
+\doxysubsubsection{\texorpdfstring{network\_object\_init()}{network\_object\_init()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}}$\ast$ network\+\_\+object\+\_\+init (\begin{DoxyParamCaption}\item[{const enum \mbox{\hyperlink{network__object_8h_a3af7baddc641a3b4f5a9189b589eccf7}{object\+\_\+type\+\_\+t}}}]{type,  }\item[{const size\+\_\+t}]{id }\end{DoxyParamCaption})}
+
+Initialize a network object, given the size and the type (switch/link/server) \mbox{\Hypertarget{network__object_8h_a186fbb5f85f6559127895d3735a8137a}\label{network__object_8h_a186fbb5f85f6559127895d3735a8137a}} 
+\index{network\_object.h@{network\_object.h}!network\_object\_set\_name@{network\_object\_set\_name}}
+\index{network\_object\_set\_name@{network\_object\_set\_name}!network\_object.h@{network\_object.h}}
+\doxysubsubsection{\texorpdfstring{network\_object\_set\_name()}{network\_object\_set\_name()}}
+{\footnotesize\ttfamily void network\+\_\+object\+\_\+set\+\_\+name (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structnetwork__object__t}{network\+\_\+object\+\_\+t}} $\ast$}]{a,  }\item[{const char $\ast$}]{name }\end{DoxyParamCaption})}
+
+Set a name for the network object 

@@ -39,6 +39,8 @@ struct packet_t {
   enum packet_state_t state;
 };
 
+struct packet_t *packet_init(void);
+
 /**
  * get the next incoming packet, store its data and evaluate the incoming time
  * (considering all the delays)

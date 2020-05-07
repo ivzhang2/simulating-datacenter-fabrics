@@ -7,6 +7,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+void trace_free(struct trace_t *pt) {
+  free(pt->pparr);
+  free(pt);
+}
+
 struct trace_t *trace_load(const char *filename, const size_t n_filename) {
   FILE *pf;
   char *line = NULL;
@@ -27,7 +32,7 @@ struct trace_t *trace_load(const char *filename, const size_t n_filename) {
   double abs_arrival = 0.0;
 
   while ((read = getline(&line, &len, pf)) != -1) {
-    struct packet_t *pp = malloc(sizeof(struct packet_t));
+    struct packet_t *pp = packet_init();
     assert(pp != NULL);
 
     if (pt->pparr == NULL) {
