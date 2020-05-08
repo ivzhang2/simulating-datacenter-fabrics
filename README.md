@@ -48,31 +48,26 @@ Once the download is complete, the code can be compiled using the command:
 
 ### 2.3. Code Documentation
 
-We use [Doxygen](http://www.doxygen.nl/index.html) to generate the documentation of our code and visualize the relations between the elements within our modules. To download Doxygen, follow the manual listed in the [website](http://www.doxygen.nl/download.html). If you prefer to use Homebrew, you can execute the following command:
-
-	brew install doxygen
-
-Once, Doxygen is installed, you can easily view the documentation using the following commands:
+We use [Doxygen](http://www.doxygen.nl/index.html) to generate the documentation of our code and visualize the relations between the elements within our modules. 
+You can easily view the documentation using the following commands:
 
 - For Mac OS X:
 
-	`make doc`
-
-	`open docs/html/index.html`
+	```
+	open docs/html/index.html
+	```
 		
 
 - For Windows:
 
-	`make doc`
-
-	`start docs/html/index.html`
+	```
+	start docs/html/index.html
+	```
 
 - For Linux/Unix:
-
-	`make doc`
-
-	`xdg-open docs/html/index.html`
-
+	```
+	xdg-open docs/html/index.html
+	```
 
 ## 3. Result Analysis 
 
