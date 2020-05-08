@@ -1,6 +1,8 @@
-# Simulation of datacenter fabrics
+# Simulation of datacenter fabrics {#mainpage}
 
 Collaborators: Muhammad Tirmazi, Ivan Zhang, Erik Johnson, Jessica Wijaya
+
+============
 
 ## 1. Overview
 
@@ -33,18 +35,18 @@ The code to run the simulation was developed in C, for both the serial and paral
 
 To download our code, you can clone the repository from our github page:
 
-	git clone https://github.com/ivzhang2/simulating-datacenter-fabrics
+	`git clone https://github.com/ivzhang2/simulating-datacenter-fabrics`
 
 
 Once the download is complete, the code can be compiled using the command:
 
-	make
+	`make`
 
 ### 2.3. Code Documentation
 
 We use [Doxygen](http://www.doxygen.nl/index.html) to generate the documentation of our code and visualize the relations between the elements within our modules. To download Doxygen, follow the manual listed in the [website](http://www.doxygen.nl/download.html). If you prefer to use Homebrew, you can execute the following command:
 
-	brew install doxygen
+	`brew install doxygen`
 
 Once, Doxygen is installed, you can easily view the documentation using the following commands:
 

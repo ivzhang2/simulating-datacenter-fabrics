@@ -9,20 +9,10 @@ Cloud vendors, including Amazon A\+WS, Microsoft Azure and Google Cloud, make th
 
 An actual datacenter fabric, however, looks much more like the figure below. The process of designing and deploying a datacenter fabric, and its accompanying network stack, costs upwards of a billion dollars. Hence, computer scientists evaluate a potential design’s performance using a network simulator prior to deploying it in an actual datacenter.
 
- 
-\begin{DoxyInlineImage}
-\includegraphics[height=\baselineskip,keepaspectratio=true]{fat_topology.jpeg}%Figure 1
-\end{DoxyInlineImage}
-  \hypertarget{index_autotoc_md3}{}\doxysubsubsection{1.\+2. Problem Statement}\label{index_autotoc_md3}
-Network simulators are usually serial. To get an intuition for why parallelizing a network is non-\/trivial, consider the following naive way of dividing the problem. We can simulate network devices in parallel, which involves developing a simulator for a network switch and running parallel simulations for all the switches in the above figure on separate threads. The problem with this approach is that there is a dependence between a switch and every other switch in the network, e.\+g. you cannot simulate the load on any of the switches at the top of figure 2 (core) without knowing how much data they are being sent by the switches underneath them (aggregation). The same goes for any other set of switches one can think of.
-
-...
-
-...
-
-...\hypertarget{index_autotoc_md4}{}\doxysubsection{2. Usage}\label{index_autotoc_md4}
+\hypertarget{index_autotoc_md3}{}\doxysubsubsection{1.\+2. Problem Statement}\label{index_autotoc_md3}
+Network simulators are traditionally serial. To get an intuition for why parallelizing a network is non-\/trivial, consider the following naive way of dividing the problem. We can simulate network devices in parallel, which involves developing a simulator for a network switch and running parallel simulations for all the switches in the above figure on separate threads. The problem with this approach is that there is a dependence between a switch and every other switch in the network, e.\+g. you cannot simulate the load on any of the switches at the top of figure 2 (core) without knowing how much data they are being sent by the switches underneath them (aggregation). The same goes for any other set of switches one can think of.\hypertarget{index_autotoc_md4}{}\doxysubsection{2. Usage}\label{index_autotoc_md4}
 \hypertarget{index_autotoc_md5}{}\doxysubsubsection{2.\+1 Code Dependencies}\label{index_autotoc_md5}
-The code to run the simulation was developed in C, for both the serial and parallel version. Therefore, to execute the simulation, you need to have {\ttfamily gcc} installed in your machine. Siince the parallel simulation was developed with the help of Open\+MP and M\+PI, you will also need to have {\ttfamily mpich} installed in your machine to run the parallel simulation.\hypertarget{index_autotoc_md6}{}\doxysubsubsection{2.\+2. Simulation Execution}\label{index_autotoc_md6}
+The code to run the simulation was developed in C, for both the serial and parallel version. Therefore, to execute the simulation, you need to have {\ttfamily gcc} installed in your machine. Siince the parallel simulation was developed with the help of Open\+MP and M\+PI, you will also need to have {\ttfamily openmpi} and {\ttfamily openmp} installed in your machine to run the parallel simulation.\hypertarget{index_autotoc_md6}{}\doxysubsubsection{2.\+2. Simulation Execution}\label{index_autotoc_md6}
 To download our code, you can clone the repository from our github page\+:
 
 {\ttfamily git clone \href{https://github.com/ivzhang2/simulating-datacenter-fabrics}{\texttt{ https\+://github.\+com/ivzhang2/simulating-\/datacenter-\/fabrics}}}
@@ -30,7 +20,7 @@ To download our code, you can clone the repository from our github page\+:
 Once the download is complete, the code can be compiled using the command\+:
 
 {\ttfamily make}\hypertarget{index_autotoc_md7}{}\doxysubsubsection{2.\+3. Code Documentation}\label{index_autotoc_md7}
-We used \href{http://www.doxygen.nl/index.html}{\texttt{ Doxygen}} to generate the documentation of our codes and visualize the relations between the elements within our modules. To download Doxygen, follow the manual listed in the \href{http://www.doxygen.nl/download.html}{\texttt{ website}}. If you prefer to use Homebrew, you can execute the following command\+:
+We use \href{http://www.doxygen.nl/index.html}{\texttt{ Doxygen}} to generate the documentation of our code and visualize the relations between the elements within our modules. To download Doxygen, follow the manual listed in the \href{http://www.doxygen.nl/download.html}{\texttt{ website}}. If you prefer to use Homebrew, you can execute the following command\+:
 
 {\ttfamily brew install doxygen}
 
@@ -38,7 +28,7 @@ Once, Doxygen is installed, you can easily view the documentation using the foll
 
 
 \begin{DoxyItemize}
-\item For Mac\+OS X\+:
+\item For Mac OS X\+:
 
 {\ttfamily make doc}
 
@@ -54,8 +44,3 @@ Once, Doxygen is installed, you can easily view the documentation using the foll
 
 {\ttfamily xdg-\/open docs/html/index.\+html}
 \end{DoxyItemize}\hypertarget{index_autotoc_md8}{}\doxysubsection{3. Result Analysis}\label{index_autotoc_md8}
-The result of our analysis was done on A\+WS instance {\itshape t2x2large...}, with the following spec\+:
-
-...
-
-... 

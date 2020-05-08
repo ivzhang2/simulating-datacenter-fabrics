@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['server_259',['SERVER',['../network__object_8h.html#a3af7baddc641a3b4f5a9189b589eccf7a67c96b24b23bcb408bae7626730a04b7',1,'network_object.h']]],
-  ['switch_260',['SWITCH',['../network__object_8h.html#a3af7baddc641a3b4f5a9189b589eccf7a53396ea1193548270407675ea4eeee2b',1,'network_object.h']]]
+  ['server_261',['SERVER',['../network__object_8h.html#a3af7baddc641a3b4f5a9189b589eccf7a67c96b24b23bcb408bae7626730a04b7',1,'network_object.h']]],
+  ['switch_262',['SWITCH',['../network__object_8h.html#a3af7baddc641a3b4f5a9189b589eccf7a53396ea1193548270407675ea4eeee2b',1,'network_object.h']]]
 ];
