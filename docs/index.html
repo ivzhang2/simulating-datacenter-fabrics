@@ -26,8 +26,8 @@
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="file:html/index.html">Documentation</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#overview">Overview</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#design">Design</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#performance">Performance</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#results">Results</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#conclusion">Conclusion</a></li>
                     </ul>
                 </div>
             </div>
@@ -139,8 +139,28 @@
                     (i.e. packets don't move from one network cluster to another). In this way, we can parallelize flows
                     through each of these network clusters and speedup the performance of the simulation.
                     <br><br>
-                    Phase 1 and Phase 2 are combined into the "Network Generation" component of our project and Phase 3 
+                    Phase 1 and Phase 2 are combined into the "Traffic Generation" component of our project and Phase 3 
                     is the "Network Simulation" component of our project.
+                </p>
+                <div class="text-center">
+                    <h3 class="section-subheading">Network Topology</h3>
+                </div>
+                <p>
+                    For our network simulation, we chose to create a fat tree topology. A graphical representation can be found
+                    below.
+                    <div class="text-center">
+                        <img src="../images/fattree.png" style="width:50%">
+                    </div>
+                    <br>
+                    Using our test.topo.dot file (fat_tree.topo found on the GitHub repository under tests/), we generated our
+                    own fat tree network topology shown below.
+                    <br>
+                    <div class="text-center">
+                        <img src="assets/img/fatree.png" style="width:100%">
+                    </div>
+                    <br>
+                    In the diagram, the network instances are labeled as "h#" for hosts/servers and "s#" for switches. The 
+                    lines connecting the network instances are the links in the network.
                 </p>
                 <div class="text-center">
                     <h3 class="section-subheading">Data Used</h3>
@@ -163,7 +183,7 @@
                     <div class="text-center">
                         <img class="side-image" src="assets/img/MPI.png"><img class="side-image" src="assets/img/openMP.png">
                     </div>
-                    The main 2 parallel infrastructures used are MPI and OpenMP. Specifically OpenMP was used for the Network
+                    The main 2 parallel infrastructures used are MPI and OpenMP. Specifically OpenMP was used for the Traffic
                     Generation (Phase 1 + 2) in order to speed up the process of network creation, previously a serial task.
                     MPI was used for Network Simulation (Phase 3) as a way for the pruned network clusters on separate nodes
                     to communicate with one another.
@@ -190,26 +210,135 @@
             </div>
         </section>
         <!-- About-->
-        <section class="page-section" id="performance">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Performance</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-            </div>
-        </section>
-        <!-- Team-->
-        <section class="page-section bg-light" id="results">
+        <section class="page-section" id="results">
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Results</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading">Traffic Generation</h3>
                 </div>
-                <div class="row">
+                <p>
+                    We used OpenMP to parallelize the traffic generation code on an increasing amount of threads
+                    alongside an increasing amount of flow sizes to be generated. These flow sizes increased in a
+                    exponential manner from 0.1 to 1 and eventually to 10000.
+                    <br><br> 
+                    Bar plots for the traffic generation phases can be found below (left is on a linear scale 
+                    and right is on a logarithmic scale). Furthermore, these bar plots display the error margins.
+                    <div class="text-center">
+                        <img class="side-image" src="../images/traffic_generation_barplot.png" style="width:50%"><img class="side-image" src="../images/traffic_generation_barplot_log.png" style="width:50%">
+                    </div>
+                    From the data, it is evident that paralleization of the traffic generation provided little to no improvement
+                    when the flow size to be generated is 0.1. Furthermore, the improvements that results from the parallelization
+                    of flow size generation of sizes 1, 10, and 100 are minor and are only visible on a logarithmic scale. Greater 
+                    improvements from paralleization result from flow size generation greater that 100 (i.e. 1000 and 10,000). 
+                    <br><br>
+                    Furthermore, it can be seen that in most cases more threads improves completion time. The exceptions to this
+                    are when flow sizes are 0.1, 1, and even 10 (when increasing from 4 to 5 threads), although the deviations are
+                    minor in scale.
+                    <br><br>
+                    To better visualize the speedup with an increasing number of threads, we plotted the speedup from an increasing
+                    number of threads alongside an increasing flow size.
+                    <div class="text-center">
+                        <img src="../images/traffic_generation_lineplot.png" style="width:50%">
+                    </div>
+                    From the line plot, speedup with 1 thread is constant, as it should be. Furthermore, speedup increases alongside
+                    an increasing number of threads (although it should be noted that speedup is relatively the same for any number of
+                    threads when flow size is less than or equal to 10). The rate of speedup growth is higher for runs with more threads. Finally, 
+                    the rate of speedup growth seems to approach zero for flow sizes above 1000.
+                </p>
+                <div class="text-center">
+                    <h3 class="section-subheading">Network Simulation</h3>
                 </div>
-                <div class="row">
-                    <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p></div>
+                <p>
+                    We used MPI to parallelize the network simulation code on 1 MPI node and 4 MPI nodes for increasing sizes of flows that were
+                    generated in the Traffic Generation aspect of our code.
+                    <br><br> 
+                    Bar plots for the network simulation phase can be found below.
+                    <div class="text-center">
+                        <img src="../images/simulation_completion_time.png" style="width:50%">
+                    </div>
+                    From the bar plot, it is evident that, in most cases, parallelization with MPI significantly improves the completion time of the 
+                    simulation. The exceptions for this are when the flow size is 1, where completion time of the parallelized run is slower, and
+                    when the flow size is 5, where the completion time of the parallelized run is only slightly faster.
+                    <br><br>
+                    To better visualize the speedup with more MPI nodes, we plotted the speedup from using 4 MPI nodes
+                    alongside increasing flow size.
+                    <div class="text-center">
+                        <img src="../images/simulation_speedup.png" style="width:50%">
+                    </div>
+                    From the line plot above, it can be seen that speedup grows linearly with problem size but declines slightly
+                    with flow sizes greater than 25. It should also be noted that for flow sizes between 1 and 5, speedup is less
+                    than one, meaning that the parallel version is slower than the serial version.
+                </p>
+            </div>
+        </section>
+        <!-- Team-->
+        <section class="page-section bg-light" id="conclusion">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Conclusion</h2>
+                    <h3 class="section-subheading">Challenges</h3>
                 </div>
+                <p>
+
+                </p>
+                <div class="text-center">
+                    <h3 class="section-subheading">Overheads</h3>
+                </div>
+                <p>
+                    We used MPI to parallelize the network simulation code on 1 MPI node and 4 MPI nodes for increasing sizes of flows that were
+                    generated in the Traffic Generation aspect of our code.
+                    <br><br> 
+                    From the bar plot, it is evident that, in most cases, parallelization with MPI significantly improves the completion time of the 
+                    simulation. The exceptions for this are when the flow size is 1, where completion time of the parallelized run is slower, and
+                    when the flow size is 5, where the completion time of the parallelized run is only slightly faster.
+                    <br><br>
+                    To better visualize the speedup with more MPI nodes, we plotted the speedup from using 4 MPI nodes
+                    alongside increasing flow size.
+                    <br>
+                    From the line plot above, it can be seen that speedup grows linearly with problem size but declines slightly
+                    with flow sizes greater than 25. It should also be noted that for flow sizes between 1 and 5, speedup is less
+                    than one, meaning that the parallel version is slower than the serial version.
+                </p>
+                <div class="text-center">
+                    <h3 class="section-subheading">Conclusions</h3>
+                </div>
+                <p>
+                    We used MPI to parallelize the network simulation code on 1 MPI node and 4 MPI nodes for increasing sizes of flows that were
+                    generated in the Traffic Generation aspect of our code.
+                    <br><br> 
+                    Bar plots for the network simulation phase can be found below.
+                    <br>
+                    From the bar plot, it is evident that, in most cases, parallelization with MPI significantly improves the completion time of the 
+                    simulation. The exceptions for this are when the flow size is 1, where completion time of the parallelized run is slower, and
+                    when the flow size is 5, where the completion time of the parallelized run is only slightly faster.
+                    <br><br>
+                    To better visualize the speedup with more MPI nodes, we plotted the speedup from using 4 MPI nodes
+                    alongside increasing flow size.
+                    <br>
+                    From the line plot above, it can be seen that speedup grows linearly with problem size but declines slightly
+                    with flow sizes greater than 25. It should also be noted that for flow sizes between 1 and 5, speedup is less
+                    than one, meaning that the parallel version is slower than the serial version.
+                </p>
+                <div class="text-center">
+                    <h3 class="section-subheading">Future Work</h3>
+                </div>
+                <p>
+                    We used MPI to parallelize the network simulation code on 1 MPI node and 4 MPI nodes for increasing sizes of flows that were
+                    generated in the Traffic Generation aspect of our code.
+                    <br><br> 
+                    Bar plots for the network simulation phase can be found below.
+                    <br>
+                    From the bar plot, it is evident that, in most cases, parallelization with MPI significantly improves the completion time of the 
+                    simulation. The exceptions for this are when the flow size is 1, where completion time of the parallelized run is slower, and
+                    when the flow size is 5, where the completion time of the parallelized run is only slightly faster.
+                    <br><br>
+                    To better visualize the speedup with more MPI nodes, we plotted the speedup from using 4 MPI nodes
+                    alongside increasing flow size.
+                    <br>
+                    From the line plot above, it can be seen that speedup grows linearly with problem size but declines slightly
+                    with flow sizes greater than 25. It should also be noted that for flow sizes between 1 and 5, speedup is less
+                    than one, meaning that the parallel version is slower than the serial version.
+                </p>
             </div>
         </section>
 
