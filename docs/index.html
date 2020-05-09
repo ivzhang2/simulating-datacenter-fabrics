@@ -141,6 +141,12 @@
                     <br><br>
                     Phase 1 and Phase 2 are combined into the "Traffic Generation" component of our project and Phase 3 
                     is the "Network Simulation" component of our project.
+                    <br>
+                    At the end of our project, we produce a flow completion time CDF like the one shown below (which was 
+                    generated from a "fork" topology of one sender and two receivers). 
+                    <div class="text-center">
+                        <img src="../results/fct_cdf.png" style="width:50%">
+                    </div>
                 </p>
                 <div class="text-center">
                     <h3 class="section-subheading">Network Topology</h3>
@@ -279,65 +285,66 @@
                     <h3 class="section-subheading">Challenges</h3>
                 </div>
                 <p>
-
+                    The main challenges we faced were:
+                    <ul>
+                        <li>Ensuring that network clusters are correctly pruned and isolated.</li>
+                        <li>Creating small yet comprehensive data structures to hold what is needed for the simulation</li>
+                        <li>Combining every single phase (Traffic Generation + Network Simulation) to create a seamless application</li>
+                        <li>Optimizing the parallelized performance of the nodes for the network simulation.</li>
+                    </ul>
                 </p>
                 <div class="text-center">
                     <h3 class="section-subheading">Overheads</h3>
                 </div>
                 <p>
-                    We used MPI to parallelize the network simulation code on 1 MPI node and 4 MPI nodes for increasing sizes of flows that were
-                    generated in the Traffic Generation aspect of our code.
-                    <br><br> 
-                    From the bar plot, it is evident that, in most cases, parallelization with MPI significantly improves the completion time of the 
-                    simulation. The exceptions for this are when the flow size is 1, where completion time of the parallelized run is slower, and
-                    when the flow size is 5, where the completion time of the parallelized run is only slightly faster.
-                    <br><br>
-                    To better visualize the speedup with more MPI nodes, we plotted the speedup from using 4 MPI nodes
-                    alongside increasing flow size.
-                    <br>
-                    From the line plot above, it can be seen that speedup grows linearly with problem size but declines slightly
-                    with flow sizes greater than 25. It should also be noted that for flow sizes between 1 and 5, speedup is less
-                    than one, meaning that the parallel version is slower than the serial version.
+                    The main overheads of our project were:
+                    <ul>
+                        <li>
+                            Communication: Multiple objects in our code (i.e. switches, links, and queues) needed
+                            to communicate with one another to relay information and pass the network packet.
+                            Furthermore, communication was needed between the MPI nodes in order to communicate
+                            results and times.
+                        </li>
+                        <li>
+                            I/O: The need to read and write large files for the random sampling of the CDF,
+                            the generation of the fat tree network topology, and reading the flow sizes for the simulation.
+                        </li>
+                        <li>
+                            Sequential Operations: The queue used by the server is serial by nature and cannot be parallelized.
+                        </li>
+                        <li>
+                            Load Balancing: Time is needed in order to prune and prepare the isolated network clusters that can 
+                            then be used for parallelization.
+                        </li>
+                    </ul>
                 </p>
                 <div class="text-center">
                     <h3 class="section-subheading">Conclusions</h3>
                 </div>
                 <p>
-                    We used MPI to parallelize the network simulation code on 1 MPI node and 4 MPI nodes for increasing sizes of flows that were
-                    generated in the Traffic Generation aspect of our code.
-                    <br><br> 
-                    Bar plots for the network simulation phase can be found below.
-                    <br>
-                    From the bar plot, it is evident that, in most cases, parallelization with MPI significantly improves the completion time of the 
-                    simulation. The exceptions for this are when the flow size is 1, where completion time of the parallelized run is slower, and
-                    when the flow size is 5, where the completion time of the parallelized run is only slightly faster.
+                    Parallelization of our Traffic Generation code significantly benefitted it performance although the rate
+                    of its speedup increases started to decline after flow sizes over 1000. It should be noted, however, that
+                    parallelization only helped Traffic Generations of flow sizes over 100 due to the added overheads that
+                    comes with parallelization. Thus, we suggest that parallelization by increasing threads with OpenMP 
+                    is a viable way of generating the large traffic flows needed for network simulations. One caveat, however,
+                    is that speedup starts to remain constant after flow sizes of 1000 which could be addressed with more threads
+                    or other improvements in the code (see Future Work below).
                     <br><br>
-                    To better visualize the speedup with more MPI nodes, we plotted the speedup from using 4 MPI nodes
-                    alongside increasing flow size.
-                    <br>
-                    From the line plot above, it can be seen that speedup grows linearly with problem size but declines slightly
-                    with flow sizes greater than 25. It should also be noted that for flow sizes between 1 and 5, speedup is less
-                    than one, meaning that the parallel version is slower than the serial version.
+                    Parallelization of our Network Simulation with just 4 MPI nodes resulted in massive improvements in performance,
+                    although speedup started to decline after flow sizes of 30. It should also be noted that (like the parallelization
+                    of the traffic generation), parallelization provided little benefits and was, at times, detrimental to completion
+                    time for flow sizes at or below 5. Thus, we suggest that parallelization through the use of MPI nodes is viable
+                    way to reduce the completion time of large network simulations. The benefits/speedups of this parallelization 
+                    could be potentially greater with the use of more MPI nodes (see Future Work below).
                 </p>
                 <div class="text-center">
                     <h3 class="section-subheading">Future Work</h3>
                 </div>
                 <p>
-                    We used MPI to parallelize the network simulation code on 1 MPI node and 4 MPI nodes for increasing sizes of flows that were
-                    generated in the Traffic Generation aspect of our code.
-                    <br><br> 
-                    Bar plots for the network simulation phase can be found below.
-                    <br>
-                    From the bar plot, it is evident that, in most cases, parallelization with MPI significantly improves the completion time of the 
-                    simulation. The exceptions for this are when the flow size is 1, where completion time of the parallelized run is slower, and
-                    when the flow size is 5, where the completion time of the parallelized run is only slightly faster.
-                    <br><br>
-                    To better visualize the speedup with more MPI nodes, we plotted the speedup from using 4 MPI nodes
-                    alongside increasing flow size.
-                    <br>
-                    From the line plot above, it can be seen that speedup grows linearly with problem size but declines slightly
-                    with flow sizes greater than 25. It should also be noted that for flow sizes between 1 and 5, speedup is less
-                    than one, meaning that the parallel version is slower than the serial version.
+                    In the future, we would like to investigate whether an increasing number of MPI nodes will further speedup
+                    the simulation. Furthermore, we would like to look into the posibility of GPU computing as a way of improving
+                    our traffic generation as well as network simulation code. Additionally, we can find methods to deal with overheads
+                    that hinder the speed of some aspects of our project.
                 </p>
             </div>
         </section>
