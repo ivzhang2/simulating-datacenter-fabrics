@@ -1,8 +1,12 @@
-# Simulation of datacenter fabrics {#mainpage}
+# Datacenter Fabric Simulator
+
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
+[![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](http://shields.io/)
+[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](http://ansicolortags.readthedocs.io/?badge=latest)
+[![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
+
 
 Collaborators: Muhammad Tirmazi, Ivan Zhang, Erik Johnson, Jessica Wijaya
-
-============
 
 ## 1. Overview
 
@@ -17,71 +21,54 @@ stack, costs upwards of a billion dollars. Hence, computer scientists evaluate a
 potential design’s performance using a network simulator prior to deploying it
 in an actual datacenter.
 
-![Figure 1](fat_topology.jpeg)
+<img src="images/fattree.png" alt="Figure 1" width="500"/>
 
 ### 1.2. Problem Statement
 
-Network simulators are usually serial. To get an intuition for why parallelizing a network is non-trivial, consider the following naive way of dividing the problem. We can simulate network devices in parallel, which involves developing a simulator for a network switch and running parallel simulations for all the switches in the above figure on separate threads. The problem with this approach is that there is a dependence between a switch and every other switch in the
+Network simulators are traditionally serial. To get an intuition for why parallelizing a network is non-trivial, consider the following naive way of dividing the problem. We can simulate network devices in parallel, which involves developing a simulator for a network switch and running parallel simulations for all the switches in the above figure on separate threads. The problem with this approach is that there is a dependence between a switch and every other switch in the
 network, e.g. you cannot simulate the load on any of the switches at the top of figure 2 (core) without knowing how much data they are being sent by the switches underneath them (aggregation). The same goes for any other set of switches one can think of.
-
-...
-
-...
-
-...
 
 
 ## 2. Usage
 
 ### 2.1 Code Dependencies
 
-The code to run the simulation was developed in C, for both the serial and parallel version. Therefore, to execute the simulation, you need to have `gcc` installed in your machine. Siince the parallel simulation was developed with the help of OpenMP and MPI, you will also need to have `mpich` installed in your machine to run the parallel simulation.
+The code to run the simulation was developed in C, for both the serial and parallel version. Therefore, to execute the simulation, you need to have `gcc` installed in your machine. Siince the parallel simulation was developed with the help of OpenMP and MPI, you will also need to have `openmpi` and `openmp` installed in your machine to run the parallel simulation.
 
 ### 2.2. Simulation Execution
 
 To download our code, you can clone the repository from our github page:
 
-	`git clone https://github.com/ivzhang2/simulating-datacenter-fabrics`
+	git clone https://github.com/ivzhang2/simulating-datacenter-fabrics
 
 
 Once the download is complete, the code can be compiled using the command:
 
-	`make`
-
-
+	make
 
 ### 2.3. Code Documentation
 
-We used [Doxygen](http://www.doxygen.nl/index.html) to generate the documentation of our codes and visualize the relations between the elements within our modules. To download Doxygen, follow the manual listed in the [website](http://www.doxygen.nl/download.html). If you prefer to use Homebrew, you can execute the following command:
+We use [Doxygen](http://www.doxygen.nl/index.html) to generate the documentation of our code and visualize the relations between the elements within our modules. 
+You can easily view the documentation using the following commands:
 
-	`brew install doxygen`
+- For Mac OS X:
 
-Once, Doxygen is installed, you can easily view the documentation using the following commands:
-
-- For MacOS X:
-
-	`make doc`
-
-	`open docs/html/index.html`
+	```
+	open docs/html/index.html
+	```
 		
 
 - For Windows:
 
-	`make doc`
-
-	`start docs/html/index.html`
+	```
+	start docs/html/index.html
+	```
 
 - For Linux/Unix:
-
-	`make doc`
-
-	`xdg-open docs/html/index.html`
-
+	```
+	xdg-open docs/html/index.html
+	```
 
 ## 3. Result Analysis 
 
-The result of our analysis was done on AWS instance *t2x2large...*, with the following spec:
 
-...
-
-...
