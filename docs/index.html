@@ -20,10 +20,11 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top"><h1>Simulating Datacenter Frameworks</h1></a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu<i class="fas fa-bars ml-1"></i></button>
+                <a class="navbar-brand js-scroll-trigger" href="#page-top"><h1>Simulating Datacenter<br>Frameworks</h1></a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu<i class="fas fa-bars ml-1"></i></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ml-auto">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#background">background</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="file:html/index.html">Documentation</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#overview">Overview</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#design">Design</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#performance">Performance</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#results">Results</a></li>
@@ -45,14 +46,66 @@
             </div>
         </header>
         <!-- Services-->
-        <section class="page-section" id="background">
+        <section class="page-section" id="overview">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Background</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading text-uppercase">Overview</h2>
+                    <h3 class="section-subheading">Background</h3>
                 </div>
-                <div class="row text-center">
+                    <p>
+                        Cloud vendors, including Amazon AWS, Microsoft Azure and Google Cloud, 
+                        make their datacenter network accessible for clients by abstracting out 
+                        the complexities of the underlying interconnect. For the client, the 
+                        datacenter network is one large fabric that magically connects all of their 
+                        rented instances as in <b>Figure 1</b>. <br>
+                        <div class="text-center">
+                            <img src="assets/img/figure1.png">
+                        </div>
+                        An actual data center fabric, however, looks much more like <b>Figure 2</b> below. 
+                        The process of designing and deploying a data center fabric, and its accompanying 
+                        network stack, costs upwards of a billion dollars. Hence, computer scientists 
+                        evaluate a potential design’s performance using a network simulator prior to 
+                        deploying it in an actual datacenter. 
+                        <div class="text-center">
+                            <img src="assets/img/figure2.png">
+                        </div>
+                    </p>
+                <div class="text-center">
+                    <h3 class="section-subheading">Problem</h3>
                 </div>
+                    <p>
+                        Network simulators are usually serial. This proves to be a major issue for data center
+                        frameworks which tend to be massive in scale with multiple highly interconnected
+                        layers. Furthermore for large data centers, which are extremely expensive, network
+                        issues like network congestion can result in additional high costs and service issues
+                        if unaccounted for. Therefore these simulations are important as they help highlight issues
+                        such as network bottlenecks in different network topologies. These simulations also help to
+                        optimize network topologies and better balance traffic. We will use parallelization to deal
+                        with the <b>compute-intensive</b> aspect of traversing network nodes (i.e. servers, switches, and links)
+                        that comprise these simulations.
+                        <br><br>
+                        To get an intuition for why parallelizing a 
+                        network is non-trivial, consider the following naive way of dividing the problem.
+                        <br><br>
+                        Approach 1: Simulate network devices in parallel. This involves writing a simulator for 
+                        a network switch and running parallel simulations for all the switches in figure 2 on 
+                        separate threads. The problem with this approach is that there is a dependence between 
+                        a switch and every other switch in the network. As an example, you cannot simulate the 
+                        load on any of the switches at the top of figure 2 (core) without knowing how much data 
+                        they are being sent by the switches underneath them (aggregation). The same goes for 
+                        any other set of switches one can think of.
+                        <br><br>
+                        Other approaches, such as trying to simulate network traffic in parallel, have similar pitfalls.
+                    </p>
+                <div class="text-center">
+                    <h3 class="section-subheading">Solution</h3>
+                </div>
+                <p>
+                    For our project, we used multi-processing for the purposes of traffic generation and for reading traces,
+                    traffic matrices, and network topologies. Furthermore, we used multi-threading for the execution of 
+                    pruned/isolated network clusters on separate nodes. Finally shared memory is used to aggregate the results
+                    at the end as well as to share traffic information between nodes.
+                </p>
             </div>
         </section>
         <!-- Portfolio Grid-->
