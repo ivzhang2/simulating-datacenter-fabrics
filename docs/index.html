@@ -145,7 +145,7 @@
                     At the end of our project, we produce a flow completion time CDF like the one shown below (which was 
                     generated from a "fork" topology of one sender and two receivers). 
                     <div class="text-center">
-                        <img src="../results/fct_cdf.png" style="width:50%">
+                        <img src="assets/img/fct_cdf.png" style="width:50%">
                     </div>
                 </p>
                 <div class="text-center">
@@ -155,7 +155,7 @@
                     For our network simulation, we chose to create a fat tree topology. A graphical representation can be found
                     below.
                     <div class="text-center">
-                        <img src="../images/fattree.png" style="width:50%">
+                        <img src="assets/img/fattree.png" style="width:50%">
                     </div>
                     <br>
                     Using our test.topo.dot file (fat_tree.topo found on the GitHub repository under tests/), we generated our
@@ -230,7 +230,7 @@
                     Bar plots for the traffic generation phases can be found below (left is on a linear scale 
                     and right is on a logarithmic scale). Furthermore, these bar plots display the error margins.
                     <div class="text-center">
-                        <img class="side-image" src="../images/traffic_generation_barplot.png" style="width:50%"><img class="side-image" src="../images/traffic_generation_barplot_log.png" style="width:50%">
+                        <img class="side-image" src="assets/img/traffic_generation_barplot.png" style="width:50%"><img class="side-image" src="assets/img/traffic_generation_barplot_log.png" style="width:50%">
                     </div>
                     From the data, it is evident that paralleization of the traffic generation provided little to no improvement
                     when the flow size to be generated is 0.1. Furthermore, the improvements that results from the parallelization
@@ -244,7 +244,7 @@
                     To better visualize the speedup with an increasing number of threads, we plotted the speedup from an increasing
                     number of threads alongside an increasing flow size.
                     <div class="text-center">
-                        <img src="../images/traffic_generation_lineplot.png" style="width:50%">
+                        <img src="assets/img/traffic_generation_lineplot.png" style="width:50%">
                     </div>
                     From the line plot, speedup with 1 thread is constant, as it should be. Furthermore, speedup increases alongside
                     an increasing number of threads (although it should be noted that speedup is relatively the same for any number of
@@ -260,7 +260,7 @@
                     <br><br> 
                     Bar plots for the network simulation phase can be found below.
                     <div class="text-center">
-                        <img src="../images/simulation_completion_time.png" style="width:50%">
+                        <img src="assets/img/simulation_completion_time.png" style="width:50%">
                     </div>
                     From the bar plot, it is evident that, in most cases, parallelization with MPI significantly improves the completion time of the 
                     simulation. The exceptions for this are when the flow size is 1, where completion time of the parallelized run is slower, and
@@ -269,7 +269,7 @@
                     To better visualize the speedup with more MPI nodes, we plotted the speedup from using 4 MPI nodes
                     alongside increasing flow size.
                     <div class="text-center">
-                        <img src="../images/simulation_speedup.png" style="width:50%">
+                        <img src="assets/img/simulation_speedup.png" style="width:50%">
                     </div>
                     From the line plot above, it can be seen that speedup grows linearly with problem size but declines slightly
                     with flow sizes greater than 25. It should also be noted that for flow sizes between 1 and 5, speedup is less
