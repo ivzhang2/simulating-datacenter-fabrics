@@ -54,6 +54,12 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+.side-image {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
 }
@@ -159,12 +165,12 @@ sup {
 }
 
 a {
-  color: #fed136;
+  color: white;
   text-decoration: none;
   background-color: transparent;
 }
 a:hover {
-  color: #e6b301;
+  color: #black;
   text-decoration: underline;
 }
 

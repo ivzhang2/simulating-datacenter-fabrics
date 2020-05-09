@@ -39,7 +39,7 @@
                 <div class="masthead-subheading">
                     Harvard CS205 Final Project - Spring 2020 <br>
                     Group 6: Erik Johnsson, Muhammad Tirmazi, Jessica Wijaya, and Ivan Zhang <br>
-                    <a href="https://github.com/ivzhang2/simulating-datacenter-fabrics">GitHub Repository</a>
+                    <a href="https://github.com/ivzhang2/simulating-datacenter-fabrics">GitHub Repository<br><img src="assets/img/github.png"></a>
 
                 </div>
 
@@ -113,10 +113,80 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Design</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <div class="text-center">
+                        <h3 class="section-subheading">Overview of Phases</h3>
+                    </div>
                 </div>
-                <div class="row">
+                <p>
+                    The design of our project consisted of 3 phases.
+                    <br><br>
+                    <b>Phase 1</b>: Fake traffic generation for network flow. <br>
+                    In order to generate fake traffic, we require user input in the form of the CDF of the traffic
+                    as well as the interarrival times. With the CDF, we use random sampling on the inverse CDF in order
+                    to simulate the load of the time. Finally, we use the Poisson Process in order to get the time of the
+                    next flow.
+                    <br><br>
+                    <b>Phase 2</b>: Fake network creation with switches and service/time delay for simulation. <br>
+                    For this phase, we implemented a M/M/1 Queue that simulated the service time of the switches. This
+                    queue is then processed in a FIFO manner. While this queue is processed, we add the link delay between
+                    switches as the network simulation runs. This queue will run through the network topology created in 
+                    the next phase.
+                    <br><br>
+                    <b>Phase 3</b>: Evaluation of network topologies using simulation. <br>
+                    We realize that network packets don't always interact with every single part of the network. Thus we can
+                    parallelize the network through the creation of isolated network clusters. Thus in this phase, we 
+                    prune the entire network into network clusters that are isolated from one another 
+                    (i.e. packets don't move from one network cluster to another). In this way, we can parallelize flows
+                    through each of these network clusters and speedup the performance of the simulation.
+                    <br><br>
+                    Phase 1 and Phase 2 are combined into the "Network Generation" component of our project and Phase 3 
+                    is the "Network Simulation" component of our project.
+                </p>
+                <div class="text-center">
+                    <h3 class="section-subheading">Data Used</h3>
                 </div>
+                <p>
+                    Examples of network flow size traces can be found publicly from 
+                    <a href="https://www.caida.org/data/passive/passive_dataset_download.xml" style="color:#17a2b8">CAIDA (Center for Applied Internet Data Analysis)</a>,
+                    <a href="https://github.com/datacenter/empirical-traffic-gen" style="color:#17a2b8">GitHub</a>, and
+                    <a href="https://github.com/google/cluster-data/blob/master/ClusterData2019.md" style="color:#17a2b8">Google</a>.
+                    <br> 
+                    More information on the use of the Poisson Process for network load generation can be found on  
+                    <a href="https://web.stanford.edu/~skatti/pubs/sigcomm13-pfabric.pdf" style="color:#17a2b8">Alizadeh et. al (MIT)</a>, and
+                    <a href="https://www.cs.cmu.edu/~harchol/PerformanceModeling/book.html" style="color:#17a2b8">Harchol-Balter et. al (Carnegie Mellon)
+                    </a>.
+                </p>
+                <div class="text-center">
+                    <h3 class="section-subheading">Infrastructure</h3>
+                </div>
+                <p>
+                    <div class="text-center">
+                        <img class="side-image" src="assets/img/MPI.png"><img class="side-image" src="assets/img/openMP.png">
+                    </div>
+                    The main 2 parallel infrastructures used are MPI and OpenMP. Specifically OpenMP was used for the Network
+                    Generation (Phase 1 + 2) in order to speed up the process of network creation, previously a serial task.
+                    MPI was used for Network Simulation (Phase 3) as a way for the pruned network clusters on separate nodes
+                    to communicate with one another.
+                </p>
+                <div class="text-center">
+                    <h3 class="section-subheading">Specification</h3>
+                </div>
+                <p>
+                    <b>Machine Specifications</b>
+                    <ul>
+                        <li>SPECIFICATIONS</li>
+                        <li>SPECIFICATIONS</li>
+                        <li>SPECIFICATIONS</li>
+                        <li>SPECIFICATIONS</li>
+                    </ul>
+                    <b>Software Specifications</b>
+                    <ul>
+                        <li>SPECIFICATIONS</li>
+                        <li>SPECIFICATIONS</li>
+                        <li>SPECIFICATIONS</li>
+                        <li>SPECIFICATIONS</li>
+                    </ul>
+                </p>
             </div>
         </section>
         <!-- About-->
