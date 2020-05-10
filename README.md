@@ -69,6 +69,5 @@ You can easily view the documentation using the following commands:
 	xdg-open docs/html/index.html
 	```
 
-## 3. Result Analysis 
 
 
