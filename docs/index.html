@@ -220,8 +220,8 @@
                 </div>
                 <p>
                     We used OpenMP to parallelize the traffic generation code on an increasing amount of threads
-                    alongside an increasing amount of flow sizes to be generated. These flow sizes increased in a
-                    exponential manner from 0.1 to 1 and eventually to 10000.
+                    alongside increasing simulation times (in ms) which requires more data to be generated.
+                    These simulation times increased in a exponential manner from 0.1 to 1 and eventually to 10000.
                     <br><br> 
                     Bar plots for the traffic generation phases can be found below (left is on a linear scale 
                     and right is on a logarithmic scale). Furthermore, these bar plots display the error margins.
@@ -229,29 +229,29 @@
                         <img class="side-image" src="assets/img/traffic_generation_barplot.png" style="width:50%"><img class="side-image" src="assets/img/traffic_generation_barplot_log.png" style="width:50%">
                     </div>
                     From the data, it is evident that paralleization of the traffic generation provided little to no improvement
-                    when the flow size to be generated is 0.1. Furthermore, the improvements that results from the parallelization
-                    of flow size generation of sizes 1, 10, and 100 are minor and are only visible on a logarithmic scale. Greater 
-                    improvements from paralleization result from flow size generation greater that 100 (i.e. 1000 and 10,000). 
+                    when the simulation time (to be generated) is 0.1 ms. Furthermore, the improvements that result from the parallelization
+                    of traffic generation for simulation times of 1, 10, and 100 ms are minor and are only visible on a logarithmic scale. Greater 
+                    improvements from paralleization result from traffic generation greater that 100 ms.
                     <br><br>
                     Furthermore, it can be seen that in most cases more threads improves completion time. The exceptions to this
-                    are when flow sizes are 0.1, 1, and even 10 (when increasing from 4 to 5 threads), although the deviations are
+                    are when the simulation times are 0.1, 1, and even 10 ms (when increasing from 4 to 5 threads), although the deviations are
                     minor in scale.
                     <br><br>
                     To better visualize the speedup with an increasing number of threads, we plotted the speedup from an increasing
-                    number of threads alongside an increasing flow size.
+                    number of threads alongside an increasing simulation time.
                     <div class="text-center">
                         <img src="assets/img/traffic_generation_lineplot.png" style="width:50%">
                     </div>
                     From the line plot, speedup with 1 thread is constant, as it should be. Furthermore, speedup increases alongside
                     an increasing number of threads (although it should be noted that speedup is relatively the same for any number of
-                    threads when flow size is less than or equal to 10). The rate of speedup growth is higher for runs with more threads. Finally, 
-                    the rate of speedup growth seems to approach zero for flow sizes above 1000.
+                    threads when simulation time is less than or equal to 10 ms). The rate of speedup growth is higher for runs with more threads. Finally, 
+                    the rate of speedup growth seems to approach zero for the generation of traffic data for simulation times above 1000 ms.
                 </p>
                 <div class="text-center">
                     <h3 class="section-subheading">Network Simulation</h3>
                 </div>
                 <p>
-                    We used MPI to parallelize the network simulation code on 1 MPI node and 4 MPI nodes for increasing sizes of flows that were
+                    We used MPI to parallelize the network simulation code on 1 MPI node and 4 MPI nodes for increasing simulation times that were
                     generated in the Traffic Generation aspect of our code.
                     <br><br> 
                     Bar plots for the network simulation phase can be found below.
@@ -259,17 +259,17 @@
                         <img src="assets/img/simulation_completion_time.png" style="width:50%">
                     </div>
                     From the bar plot, it is evident that, in most cases, parallelization with MPI significantly improves the completion time of the 
-                    simulation. The exceptions for this are when the flow size is 1, where completion time of the parallelized run is slower, and
-                    when the flow size is 5, where the completion time of the parallelized run is only slightly faster.
+                    simulation. The exceptions for this are when the simulation time is 1 ms, where completion time of the parallelized run is slower, and
+                    when the simulation time is 5 ms, where the completion time of the parallelized run is only slightly faster.
                     <br><br>
                     To better visualize the speedup with more MPI nodes, we plotted the speedup from using 4 MPI nodes
-                    alongside increasing flow size.
+                    alongside increasing simulation time.
                     <div class="text-center">
                         <img src="assets/img/simulation_speedup.png" style="width:50%">
                     </div>
                     From the line plot above, it can be seen that speedup grows linearly with problem size but declines slightly
-                    with flow sizes greater than 25. It should also be noted that for flow sizes between 1 and 5, speedup is less
-                    than one, meaning that the parallel version is slower than the serial version.
+                    with simulation times greater than 25 ms. It should also be noted that for simulation times between 1 ms and 5 ms, 
+                    speedup is less than one, meaning that the parallel version is slower than the serial version.
                 </p>
             </div>
         </section>
@@ -318,18 +318,18 @@
                     <h3 class="section-subheading">Conclusions</h3>
                 </div>
                 <p>
-                    Parallelization of our Traffic Generation code significantly benefitted it performance although the rate
-                    of its speedup increases started to decline after flow sizes over 1000. It should be noted, however, that
-                    parallelization only helped Traffic Generations of flow sizes over 100 due to the added overheads that
+                    Parallelization of our <b>Traffic Generation</b> code significantly benefitted it performance although the rate
+                    of its speedup increases started to decline after simulation times over 1000 ms. It should be noted, however, that
+                    parallelization only helped Traffic Generations of simulation times over 100 ms due to the added overheads that
                     comes with parallelization. Thus, we suggest that parallelization by increasing threads with OpenMP 
                     is a viable way of generating the large traffic flows needed for network simulations. One caveat, however,
-                    is that speedup starts to remain constant after flow sizes of 1000 which could be addressed with more threads
+                    is that speedup starts to remain constant after simulation times of 1000 ms which could be addressed with more threads
                     or other improvements in the code (see Future Work below).
                     <br><br>
-                    Parallelization of our Network Simulation with just 4 MPI nodes resulted in massive improvements in performance,
-                    although speedup started to decline after flow sizes of 30. It should also be noted that (like the parallelization
+                    Parallelization of our <b>Network Simulation</b> with just 4 MPI nodes resulted in massive improvements in performance,
+                    although speedup started to decline after simulation times of 30 ms. It should also be noted that (like the parallelization
                     of the traffic generation), parallelization provided little benefits and was, at times, detrimental to completion
-                    time for flow sizes at or below 5. Thus, we suggest that parallelization through the use of MPI nodes is viable
+                    time for simulation times at or below 5 ms. Thus, we suggest that parallelization through the use of MPI nodes is viable
                     way to reduce the completion time of large network simulations. The benefits/speedups of this parallelization 
                     could be potentially greater with the use of more MPI nodes (see Future Work below).
                 </p>
